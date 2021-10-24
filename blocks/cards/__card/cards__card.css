@@ -1,0 +1,8 @@
+.cards__card {
+    background-color: white;
+    border-radius: 15px;
+    display: grid;
+    grid-template-areas: 
+    "image image"
+    "text heart";
+}

@@ -1,0 +1,11 @@
+.header {
+    max-width: 68.75%;
+    min-height: 6%;
+    background-color: #000000;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .header {
+        max-width: 100%;
+    }
+}

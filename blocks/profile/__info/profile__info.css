@@ -1,0 +1,21 @@
+.profile__info {
+    display: grid;
+    grid-template-areas: 
+    "name edit-profile"
+    "career .";
+    column-gap: 25px;
+    row-gap: 16px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .profile__info {
+        gap: 10px;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .profile__info {
+        gap: 14px;
+        margin-top: 22px;
+    }
+}

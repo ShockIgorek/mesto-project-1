@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./page/index.css">
+    <title>Mesto</title>
+  </head>
+  <body class="page">
+    <div class="page__container">
+      <header class="header header_place_position">
+        <div class="header__logo"></div>
+        <div class="header__line"></div>  
+      </header>
+      <main>
+       <div class="profile profile_place_position">
+          <div class="profile__column-main">
+            <img class="profile__avatar" src="./images/jak-iv-kusto.jpg" alt="Жак-Ив Кусто в красной шапке на фоне моря.">
+            <div class="profile__info">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <p class="profile__career">Исследователь океана</p>
+              <form class="form">
+                <fieldset class="form__button">
+                  <button class="profile__edit" type="submit" name="edit-profile"></button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <form class="form">
+            <fieldset class="form__button">
+              <button class="profile__add" type="submit" name="add-profile"></button>
+            </fieldset>
+          </form>
+        </div> 
+          <div class="cards cards_place_position">
+          <div class="cards__card">
+            <img class="cards__image" src="./images/karachaevsk.jpg" alt="Заброшенная каменная часовня в горах окруженная лесом.">
+            <div class="cards__flex-column">
+              <p class="cards__text">Карачаевск</p>
+              <form class="form">
+                <fieldset class="form__button">
+                  <button class="cards__heart cards__heart_active_black" type="submit" name="like-heart"></button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" src="./images/elbrus.png" alt="Гора Эльбрус на рассвете.">
+            <div class="cards__flex-column">
+              <p class="cards__text">Гора Эльбрус</p>
+              <form class="form">
+                <fieldset class="form__button">
+                  <button class="cards__heart cards__heart_active_black" type="submit" name="like-heart"></button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" src="./images/dombay.png" alt="Зимня-осенний лес на фоне полузаснеженных гор.">
+            <div class="cards__flex-column">
+              <p class="cards__text">Домбай</p>
+              <form class="form">
+                <fieldset class="form__button">
+                  <button class="cards__heart cards__heart_active_black" type="submit" name="like-heart"></button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" src="./images/ded-rock.jpg" alt="Скала напоминающая лицо человека в профиль.">
+            <div class="cards__flex-column">
+              <p class="cards__text">Скала Дед</p>
+              <form class="form">
+                <fieldset class="form__button">
+                  <button class="cards__heart cards__heart_active_black" type="submit" name="like-heart"></button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" src="./images/angara-zimoy.jpg" alt="Река Ангара в зимний период.">
+            <div class="cards__flex-column">
+              <p class="cards__text">Река Ангара</p>
+              <form class="form">
+                <fieldset class="form__button">
+                  <button class="cards__heart cards__heart_active_black" type="submit" name="like-heart"></button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <div class="cards__card">
+            <img class="cards__image" src="./images/krasnoyarsk.jpg" alt="Мост через реку Енисей зимой.">
+            <div class="cards__flex-column">
+              <p class="cards__text">Красноярск</p>
+              <form class="form">
+                <fieldset class="form__button">
+                  <button class="cards__heart cards__heart_active_black" type="submit" name="like-heart"></button>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+      <footer class="footer footer_place_position">
+        <p class="footer__copyright">© 2020 Mesto Russia</p>
+      </footer>
+      <div class="popup popup_epened">
+        <form class="popup__container">
+          <button class="popup__exit" type="submit" name="exit-btn" id="exit-button"></button>
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <fieldset class="popup__flex-container">
+              <input class="popup__edit" type="text" name="user-name" placeholder="Жак-Ив Кусто" id="user-name-field">
+              <input class="popup__edit" type="text" name="user-career" placeholder="Исследователь океана" id="user-career-field">
+              <button class="popup__save-btn" type="submit" name="save-btn" id="save-button">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

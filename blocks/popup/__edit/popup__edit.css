@@ -1,0 +1,25 @@
+.popup__edit {
+    display: block;
+    width: 88%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding-bottom: 10px;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.popup__edit:not(:first-child) {
+    margin-top: 26px;
+}
+
+.popup__edit:focus {
+    outline: none;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .popup__edit {
+        width: 90%;
+    }
+}

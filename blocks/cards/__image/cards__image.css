@@ -1,0 +1,13 @@
+.cards__image {
+    max-width: 282px;
+    min-height: 282px;
+    border-radius: 15px 15px 0 0;
+    grid-area: image;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .cards__image {
+        max-width: 234px;
+        min-height: 234px;
+    }
+}

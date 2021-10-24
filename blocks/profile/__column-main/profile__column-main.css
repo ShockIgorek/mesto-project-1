@@ -1,0 +1,19 @@
+.profile__column-main {
+    width: 508px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .profile__column-main {
+        justify-content: space-around;
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+    .profile__column-main {
+        width: 100%;
+        flex-direction: column;
+    }
+}

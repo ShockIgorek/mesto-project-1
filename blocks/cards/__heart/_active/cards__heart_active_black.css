@@ -1,0 +1,8 @@
+.elements__heart_active_black {
+    border: none;
+    background-color: white;
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../images/heart-black.svg);
+    grid-area: heart;
+}
