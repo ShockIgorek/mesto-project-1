@@ -7,7 +7,6 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/_place/header_place-position.css);
 @import url(../blocks/header/__logo/header__logo.css);
-@import url(../blocks/header/__line/header__line.css);
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/_place/profile_place_position.css);
