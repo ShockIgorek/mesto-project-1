@@ -1,8 +1,10 @@
 .elements__heart_active_black {
     border: none;
     background-color: white;
+    margin-top: 5px;
     width: 22px;
     height: 19px;
     background-image: url(../../../images/heart-black.svg);
+    background-repeat: no-repeat;
     grid-area: heart;
 }
