@@ -4,13 +4,12 @@
 @import url(../blocks/page/page.css);
 @import url(../blocks/page/__container/page__container.css);
 @import url(../blocks/page/__header/page__header.css);
+@import url(../blocks/page/__profile/page__profile.css);
 
 @import url(../blocks/header/header.css);
-@import url(../blocks/header/_place/header_place-position.css);
 @import url(../blocks/header/__logo/header__logo.css);
 
 @import url(../blocks/profile/profile.css);
-@import url(../blocks/profile/_place/profile_place_position.css);
 @import url(../blocks/profile/__column-main/profile__column-main.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
