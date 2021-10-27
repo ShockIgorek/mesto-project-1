@@ -1,11 +1,11 @@
-.header_place_position {
+.page__header {
     margin: 0 auto;
     padding-top: 45px;
     padding-bottom: 41px;;
 }
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-    .header_place_position {
+    .page__header {
         padding-top: 28px;
         padding-bottom: 31px;
     }
