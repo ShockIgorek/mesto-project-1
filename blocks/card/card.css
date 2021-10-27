@@ -1,6 +1,6 @@
 .card {
     background-color: white;
-    border-radius: 15px;
+    border-radius: 10px;
     display: grid;
     grid-template-areas: 
     "image image"
