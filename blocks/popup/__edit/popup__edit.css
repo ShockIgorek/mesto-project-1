@@ -1,6 +1,7 @@
 .popup__edit {
     display: block;
     width: 88%;
+    border: 1px solid rgba(0, 0, 0, .2);
     border-top: none;
     border-left: none;
     border-right: none;
