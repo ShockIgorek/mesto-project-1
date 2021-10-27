@@ -16,7 +16,6 @@
 
 .popup__save-btn:hover {
     opacity: 0.8;
-    transition: 0.4s linear;
 }
 
 .popup__save-btn:focus {
