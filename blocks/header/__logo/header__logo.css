@@ -11,7 +11,7 @@
     .header__logo {
         max-width: 104px;
         min-height: 25px;
-        background-image: url(../../../images/header__logo-mini.svg);
         margin-left: 27px;
+        background-size: contain;
     }
 }
