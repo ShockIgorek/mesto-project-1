@@ -2,7 +2,7 @@
     display: block;
     width: 88%;
     height: 50px;
-    margin-top: 38px;
+    margin: 38px 0 37px 0;
     border: none;
     border-radius: 5px;
     background-color: black;
@@ -26,7 +26,7 @@
 @media screen and (min-width: 320px) and (max-width: 767px) {
     .popup__save-btn {
         width: 90%;
-        margin-top: 42px;
+        margin: 42px 0 20px 0;
         font-size: 14px;
         line-height: 17px;
     }
