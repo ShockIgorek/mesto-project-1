@@ -23,8 +23,6 @@
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
     .cards {
-        max-width: 88%;
-        max-height: 2268px; 
-        grid-template-rows: repeat(auto-fit, 361px);
+        max-width: 88%;                
     }
 } 
