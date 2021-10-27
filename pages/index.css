@@ -21,11 +21,12 @@
 @import url(../blocks/profile/__add/profile__add.css);
 
 @import url(../blocks/cards/cards.css);
-@import url(../blocks/cards/__card/cards__card.css);
-@import url(../blocks/cards/__flex-column/cards__flex-column.css);
-@import url(../blocks/cards/__image/cards__image.css);
-@import url(../blocks/cards/__text/cards__text.css);
-@import url(../blocks/cards/__heart/cards__heart.css);
+
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__flex-column/card__flex-column.css);
+@import url(../blocks/card/__image/card__image.css);
+@import url(../blocks/card/__text/card__text.css);
+@import url(../blocks/card/__heart/card__heart.css);
 
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);

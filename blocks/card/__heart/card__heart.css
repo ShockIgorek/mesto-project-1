@@ -1,4 +1,4 @@
-.cards__heart {
+.card__heart {
     border: none;
     background-color: white;
     margin-top: 5px;
@@ -11,7 +11,7 @@
     grid-area: heart;
 }
 
-.cards__heart:hover {
+.card__heart:hover {
     opacity: 0.44;
     transition: 0.5s linear;
 }

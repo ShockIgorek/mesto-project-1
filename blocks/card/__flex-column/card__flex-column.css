@@ -1,11 +1,11 @@
-.cards__flex-column {
+.card__flex-column {
     min-width: 266px;
     display: flex;
     justify-content: space-between;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-    .cards__flex-column {
+    .card__flex-column {
         min-width: 213px;
     }
 }
