@@ -3,9 +3,3 @@
     display: flex;
     justify-content: space-between;
 }
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-    .card__flex-column {
-        min-width: 213px;
-    }
-}
