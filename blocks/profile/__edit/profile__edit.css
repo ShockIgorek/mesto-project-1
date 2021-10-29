@@ -20,7 +20,7 @@
         background-image: url(../../../images/edit_button-mini.svg);
         width: 18px;
         height: 18px;
-        margin: auto;
+        margin-left: 10px;
     }
 }
 

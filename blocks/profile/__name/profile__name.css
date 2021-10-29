@@ -7,6 +7,7 @@
     line-height: 48px;
     color: #FFFFFF;
     grid-area: name;
+    justify-self: end;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
