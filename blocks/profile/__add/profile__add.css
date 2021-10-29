@@ -18,7 +18,6 @@
     .profile__add {
         background-image: url(../../../images/add-button-mini.svg);
         width: 282px;
-        height: 50px;
         margin-top: 30px;
     }
 }
