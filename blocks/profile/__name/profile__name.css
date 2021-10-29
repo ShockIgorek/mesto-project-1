@@ -15,6 +15,7 @@
 
 @media screen and (max-width: 1023px) {
     .profile__name {
+        max-width: 190px;
          font-size: 27px;
          line-height: 33px;
     }
@@ -22,6 +23,6 @@
 
 @media screen and (max-width: 767px) {
     .profile__name {
-        text-align: right;
+      justify-self: end;
     }
 } 
