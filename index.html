@@ -82,7 +82,7 @@
     </footer>
     <section class="popup">
       <div class="popup__container">
-        <button class="popup__exit" type="button" aria-label="Close" name="exit-btn" id="exit-button"></button>
+        <button class="popup__exit" type="button" aria-label="Close" name="exit-btn"></button>
         <form class="popup__form" name="profile-form">
           <h2 class="popup__title">Редактировать профиль</h2>
           <fieldset class="popup__flex-container">
@@ -90,6 +90,20 @@
             <input class="popup__edit" type="text" name="user-career" placeholder="Исследователь океана"
               id="user-career-field">
             <button class="popup__save-btn" type="submit" name="save-btn" id="save-button">Сохранить</button>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+    <section class="popup" id="popup-add">
+      <div class="popup__container">
+        <button class="popup__exit" type="button" aria-label="Close" name="exit-btn" id="exit-button"></button>
+        <form class="popup__form" name="profile-form">
+          <h2 class="popup__title">Новое место</h2>
+          <fieldset class="popup__flex-container">
+            <input class="popup__edit" type="text" name="user-name" placeholder="Название" id="img-name-field">
+            <input class="popup__edit" type="text" name="user-career" placeholder="Ссылка на картинку"
+              id="img-link-field">
+            <button class="popup__save-btn" type="submit" name="save-btn" id="create-button">Создать</button>
           </fieldset>
         </form>
       </div>
