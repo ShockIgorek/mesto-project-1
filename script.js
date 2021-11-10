@@ -68,8 +68,6 @@ exitBtn.addEventListener('click', exitProfileForm); //закрытие форм�
 
 
 //Активный лайк card__heart_active
-//const cardHeart = document.querySelectorAll('.card__heart');
-
 Array.from(document.querySelectorAll('.card__heart')).forEach(heart => {
     heart.addEventListener('click', (event) => {
         event.target.classList.toggle('card__heart_active')
@@ -77,7 +75,12 @@ Array.from(document.querySelectorAll('.card__heart')).forEach(heart => {
 }) 
 
 
-/*function ClickHeart() {
-    cardHeart.classList.toggle('card__heart_active');
-} 
-cardHeart.addEventListener('click', ClickHeart); */
+//
+const deleteCard = document.querySelectorAll('.card__trash-bin');
+const deleteCardArray = Array.from(deleteCard); 
+
+deleteCardArray.forEach(item => {
+    item.addEventListener('click', (event) => {
+        item.closest('.card').remove();
+    })
+}) 
