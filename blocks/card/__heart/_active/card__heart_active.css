@@ -1,3 +1,9 @@
 .card__heart_active {
-    background-image: url(../../../images/heart-black.svg);
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 5px;
+    width: 22px;
+    height: 19px;
+    background-image: url(../../../../images/heart-black.svg);
+    background-repeat: no-repeat;
 }

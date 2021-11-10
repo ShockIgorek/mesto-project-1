@@ -65,3 +65,19 @@ function exitProfileForm() {
 
 profileAdd.addEventListener('click', addProfileForm); //открытие формы при клике на .profile__add
 exitBtn.addEventListener('click', exitProfileForm); //закрытие формы при клике на #exit-button
+
+
+//Активный лайк card__heart_active
+//const cardHeart = document.querySelectorAll('.card__heart');
+
+Array.from(document.querySelectorAll('.card__heart')).forEach(heart => {
+    heart.addEventListener('click', (event) => {
+        event.target.classList.toggle('card__heart_active')
+    })
+}) 
+
+
+/*function ClickHeart() {
+    cardHeart.classList.toggle('card__heart_active');
+} 
+cardHeart.addEventListener('click', ClickHeart); */
