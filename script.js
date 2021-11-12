@@ -67,6 +67,25 @@ profileAdd.addEventListener('click', addProfileForm); //открытие фор�
 exitBtn.addEventListener('click', exitProfileForm); //закрытие формы при клике на #exit-button
 
 
+const popupFormAdd = document.querySelector('#popup-form-add');
+const imgNameInput = document.querySelector('#img-name-field');
+const imgLinkInput = document.querySelector('#img-link-field');
+
+function addFormSubmitHandler (evt) {
+    evt.preventDefault();
+
+    const imgNameField = document.querySelector('#img-name-field').value;
+    const imgLinkField = document.querySelector('#img-link-field').value;
+
+    if (imgNameField.length === 0 || imgLinkField.length === 0) {
+        alert('Заполните все поля!')
+    } else {
+        console.log(`Название изображения: ${imgNameField}, ссылка: ${imgLinkField}`)
+        exitProfileForm();
+    }
+}
+popupFormAdd.addEventListener('submit', addFormSubmitHandler);
+
 //Активный лайк card__heart_active
 Array.from(document.querySelectorAll('.card__heart')).forEach(heart => {
     heart.addEventListener('click', (event) => {
@@ -75,7 +94,7 @@ Array.from(document.querySelectorAll('.card__heart')).forEach(heart => {
 }) 
 
 
-//
+//Удаление карточки
 const deleteCard = document.querySelectorAll('.card__trash-bin');
 const deleteCardArray = Array.from(deleteCard); 
 
@@ -83,4 +102,49 @@ deleteCardArray.forEach(item => {
     item.addEventListener('click', (event) => {
         item.closest('.card').remove();
     })
+}) 
+
+// Шесть карточек "Из коробки"
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+    ];
+
+const cardImgLink = document.querySelectorAll('.card__image');
+const nameImg = document.querySelectorAll('.card__text');
+
+let arrCardImgLink = Array.from(cardImgLink);
+let arrNameImg = Array.from(nameImg);
+
+initialCards.forEach((item, index, array) => {
+    arrNameImg[index].textContent = item.name;
+    console.log(arrNameImg);
+}); 
+
+initialCards.forEach((item, index, array) => {
+    arrCardImgLink[index].setAttribute('src', item.link);
+    arrCardImgLink[index].removeAttribute('alt');
+    console.log(arrCardImgLink);
 }) 
