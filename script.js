@@ -105,7 +105,7 @@ deleteCardArray.forEach(item => {
 }) 
 
 // Шесть карточек "Из коробки"
-const initialCards = [
+/* const initialCards = [
     {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -147,4 +147,53 @@ initialCards.forEach((item, index, array) => {
     arrCardImgLink[index].setAttribute('src', item.link);
     arrCardImgLink[index].removeAttribute('alt');
     console.log(arrCardImgLink);
-}) 
+}) */
+
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+    ];
+
+
+const containerCards = document.querySelector('.cards');
+const cardTemplate = document.querySelector('#card').content;
+
+containerCards.append(cardTemplate);
+
+const nameCard = document.querySelectorAll('.card__text');
+const linkCard = document.querySelectorAll('.card__image');
+
+const arrNameCard = Array.from(nameCard);
+
+const arrLinkCard = Array.from(linkCard);
+
+initialCards.forEach((item, index, array) => {
+    arrNameCard[index].textContent = item.name;
+}); 
+
+initialCards.forEach((item, index, array) => {
+    arrLinkCard[index].setAttribute('src', item.link);
+    arrLinkCard[index].setAttribute('alt', item.name);
+})

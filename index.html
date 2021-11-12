@@ -26,55 +26,56 @@
         <button class="profile__add" type="button" name="add-profile"></button>
       </section>
       <section class="cards page__cards">
-        <div class="card">
-          <img class="card__image" src="./images/karachaevsk.jpg"
-            alt="Заброшенная каменная часовня в горах окруженная лесом.">
-          <div class="card__flex-column">
-            <h2 class="card__text">Карачаевск</h2>
-            <button class="card__heart" type="button" name="like-heart"></button>
+        <template id="card">
+          <div class="card">
+            <img class="card__image" alt="Загруженное изображение">
+            <div class="card__flex-column">
+              <h2 class="card__text"></h2>
+              <button class="card__heart" type="button" name="like-heart"></button>
+            </div>
+            <button class="card__trash-bin" type="button" name="delete-img"></button>
           </div>
-          <button class="card__trash-bin" type="button" name="delete-img"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/elbrus.png" alt="Гора Эльбрус на рассвете.">
-          <div class="card__flex-column">
-            <h2 class="card__text">Гора Эльбрус</h2>
-            <button class="card__heart" type="button" name="like-heart"></button>
+          <div class="card">
+            <img class="card__image" alt="Загруженное изображение">
+            <div class="card__flex-column">
+              <h2 class="card__text"></h2>
+              <button class="card__heart" type="button" name="like-heart"></button>
+            </div>
+            <button class="card__trash-bin" type="button" name="delete-img"></button>
           </div>
-          <button class="card__trash-bin" type="button" name="delete-img"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/dombay.png" alt="Зимня-осенний лес на фоне полузаснеженных гор.">
-          <div class="card__flex-column">
-            <h2 class="card__text">Домбай</h2>
-            <button class="card__heart" type="button" name="like-heart"></button>
+          <div class="card">
+            <img class="card__image" alt="Загруженное изображение">
+            <div class="card__flex-column">
+              <h2 class="card__text"></h2>
+              <button class="card__heart" type="button" name="like-heart"></button>
+            </div>
+            <button class="card__trash-bin" type="button" name="delete-img"></button>
           </div>
-          <button class="card__trash-bin" type="button" name="delete-img"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/ded-rock.jpg" alt="Скала напоминающая лицо человека в профиль.">
-          <div class="card__flex-column">
-            <h2 class="card__text">Скала Дед</h2>
-            <button class="card__heart" type="button" name="like-heart"></button>
+          <div class="card">
+            <img class="card__image" alt="Загруженное изображение">
+            <div class="card__flex-column">
+              <h2 class="card__text"></h2>
+              <button class="card__heart" type="button" name="like-heart"></button>
+            </div>
+            <button class="card__trash-bin" type="button" name="delete-img"></button>
           </div>
-          <button class="card__trash-bin" type="button" name="delete-img"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/angara-zimoy.jpg" alt="Река Ангара в зимний период.">
-          <div class="card__flex-column">
-            <h2 class="card__text">Река Ангара</h2>
-            <button class="card__heart" type="button" name="like-heart"></button>
+          <div class="card">
+            <img class="card__image" alt="Загруженное изображение">
+            <div class="card__flex-column">
+              <h2 class="card__text"></h2>
+              <button class="card__heart" type="button" name="like-heart"></button>
+            </div>
+            <button class="card__trash-bin" type="button" name="delete-img"></button>
           </div>
-          <button class="card__trash-bin" type="button" name="delete-img"></button>
-        </div>
-        <div class="card">
-          <img class="card__image" src="./images/krasnoyarsk.jpg" alt="Мост через реку Енисей зимой.">
-          <div class="card__flex-column">
-            <h2 class="card__text">Красноярск</h2>
-            <button class="card__heart" type="button" name="like-heart"></button>
+          <div class="card">
+            <img class="card__image" alt="Загруженное изображение">
+            <div class="card__flex-column">
+              <h2 class="card__text"></h2>
+              <button class="card__heart" type="button" name="like-heart"></button>
+            </div>
+            <button class="card__trash-bin" type="button" name="delete-img"></button>
           </div>
-          <button class="card__trash-bin" type="button" name="delete-img"></button>
-        </div>
+        </template>
       </section>
     </main>
     <footer class="footer page__footer">
