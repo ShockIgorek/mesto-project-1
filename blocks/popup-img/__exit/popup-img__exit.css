@@ -1,0 +1,26 @@
+.popup-img__exit {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url(../../../images/exit-icon.svg);
+    background-repeat: no-repeat; 
+    width: 32px;
+    height: 32px;
+    opacity: 1;
+    transition: 0.4s linear;
+    position: absolute;
+    top: -36px;
+    right: -36px;
+}
+.popup-img__exit:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 767px) {
+    .popup-img__exit {
+        background-image: url(../../../images/exit-icon-mini.svg);
+        width: 20px;
+        height: 20px;
+        top: -26px;
+        right: -26px;
+    }
+}
