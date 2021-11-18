@@ -6,6 +6,7 @@
     margin-top: 10px;
     width: 24px;
     height: 24px;
+    cursor: pointer;
     grid-area: edit-profile; 
     opacity: 1;
     transition: 0.4s linear;

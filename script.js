@@ -9,7 +9,7 @@ const profileAdd = document.querySelector('.profile__add');
 
 //Добавление класса popup_opened
 function openPopup(popupElement) {
-  popupElement.classList.toggle('popup_opened');
+  popupElement.classList.add('popup_opened');
 }
 
 profileEdit.addEventListener('click', function() {openPopup(popup)});
@@ -39,8 +39,8 @@ function formSubmitHandler (evt) {
   const userNameField = document.querySelector('#user-name-field').value;
   const userCareerField = document.querySelector('#user-career-field').value;
 
-  let profileName = document.querySelector('.profile__name');
-  let profileCareer = document.querySelector('.profile__career');
+  const profileName = document.querySelector('.profile__name');
+  const profileCareer = document.querySelector('.profile__career');
 
   if (userNameField.length === 0 || userCareerField.length === 0) { //проверка на то, чтобы пользователь не оставил пустыми значение полей формы
       alert('Заполните все поля!');
@@ -90,13 +90,13 @@ function addFormSubmitHandler (evt) {
       alert('Заполните все поля!')
   } else {
       createNewCard()
-      let newNameCard = document.querySelector('#card-name');
+      const newNameCard = document.querySelector('#card-name');
 
-      let newLinkCard = document.querySelector('#card-link');
+      const newLinkCard = document.querySelector('#card-link');
 
       newNameCard.textContent = imgNameField;
       newLinkCard.setAttribute('src', imgLinkField);
-      console.log(`Название изображения: ${imgNameField}, ссылка: ${imgLinkField}`)
+      newLinkCard.setAttribute('alt', imgNameField);
       closePopup(popupAdd);
   }
 }
@@ -189,6 +189,7 @@ Array.from(document.querySelectorAll('.card__image')).forEach(item => {
     popupImgTitle.textContent = cardName;
 
     popupImgImage.setAttribute('src', event.target.getAttribute('src'));
+    popupImgImage.setAttribute('alt', cardName);
 
     popupImg.classList.toggle('popup-img_opened');
   })
