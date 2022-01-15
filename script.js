@@ -104,6 +104,28 @@ function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
 }
 
+function closeByKeyPopup(event) {
+  const popup = document.querySelectorAll('.popup');
+  Array.from(popup).forEach(item => {
+    if (event.code === 'Escape') {
+      closePopup(item);
+    }
+  })
+  }
+
+document.addEventListener('keyup', closeByKeyPopup); 
+
+function clickClosePopupForm(event) {
+  const popup = document.querySelectorAll('.popup');
+  Array.from(popup).forEach(item => {
+    if (event.target.classList.contains('popup')) {
+      closePopup(item);
+    }
+  })
+}
+
+document.addEventListener('click', clickClosePopupForm); 
+
 popupExit.addEventListener('click', function() {closePopup(profileEditPopup)});
 exitBtn.addEventListener('click', function() {closePopup(popupAdd)});
 popupExitImg.addEventListener('click', function() {closePopup(popupImg)});
