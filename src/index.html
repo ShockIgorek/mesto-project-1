@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="page">
@@ -15,7 +14,7 @@
     <main>
       <section class="profile page__profile">
         <div class="profile__column-main">
-          <img class="profile__avatar" src="./images/jak-iv-kusto.jpg" alt="Жак-Ив Кусто в красной шапке на фоне моря.">
+          <img class="profile__avatar" src="<%=require('./images/jak-iv-kusto.jpg')%>" alt="Жак-Ив Кусто в красной шапке на фоне моря.">
           <div class="profile__info">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__career">Исследователь океана</p>
@@ -80,8 +79,6 @@
       <button class="card__trash-bin" type="button" name="delete-img"></button> 
     </div> 
   </template>
-  <script src="./script.js"></script>
-  <script src="./src/components/validate.js"></script>
 </body>
 
 </html>

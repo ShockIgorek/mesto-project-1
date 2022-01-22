@@ -43,13 +43,13 @@ function hasInvalidInput (inputList) {
 
 //кнопка в состояние disable
 function disableButton (buttonElement, inactiveButtonClass) {
-    buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.classList.toggle(inactiveButtonClass);
     buttonElement.disabled = true;
 };
 
 //кнопка в состояние undisable
 function enablaButton (buttonElement, inactiveButtonClass) {
-    buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.classList.toggle(inactiveButtonClass);
     buttonElement.disabled = false;
 };
 
@@ -89,77 +89,4 @@ function enableValidation ({formSelector, ...rest}) {
     });
 };
 
-enableValidation(validationConfig);
-/*
-const formElement = document.querySelector('.popup__form');
-const formInput = document.querySelector('.popup__edit');
-
-//Функция, которая добавляет класс с ошибкой
-function showInputError (formElement, inputElement, errorMessage) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-        if (errorElement !== null) { 
-            inputElement.classList.add('popup__edit_type_error');
-            errorElement.textContent = errorMessage;
-            errorElement.classList.add('popup__edit_active');
-        }
-}
-
-//Функция, которая удаляет класс с ошибкой 
-function hideInputError (formElement, inputElement) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-        if (errorElement !== null) {
-            inputElement.classList.remove('popup__edit_type_error');
-            errorElement.classList.remove('popup__edit_active');
-            errorElement.textContent = '';
-        }
-}
-
-//Функция, которая проверяет валидность поля 
-function isValid (formElement, inputElement) {
-    if (!inputElement.validity.valid) {
-        showInputError(formElement, inputElement, inputElement.validationMessage);
-    } else {
-        hideInputError(formElement, inputElement);
-    }
-}
-
-//Функция, которая проверяет валидацию всех полей(принимает массив полей формы и возвращает true, если поле не валидно, false - если все поля валидны)
-function hasInvalidInput (inputList) {
-    return inputList.some((inputElement) => {
-        return !inputElement.validity.valid;
-    })
-}
-
-//Функция которая меняет состояние кнопки
-function toggleButtonState (inputList, buttonElement) {
-    if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add('popup__submit_inactive');
-    } else {
-        buttonElement.classList.remove('popup__submit_inactive');
-    }
-}
-
-function setEventListeners (formElement) {
-    const inputList = Array.from(document.querySelectorAll('.popup__edit'));
-    const buttonElement = document.querySelector('.popup__save-btn');
-    toggleButtonState(inputList, buttonElement);
-    inputList.forEach((inputElement) => {
-        inputElement.addEventListener('input', () => {
-            isValid (formElement, inputElement);
-            toggleButtonState(inputList, buttonElement);
-        });
-    });
-}
-
-function enableValidation () {
-    const formList = Array.from(document.querySelectorAll('.popup__form'));
-    formList.forEach((formElement) => {
-        formElement.addEventListener('submit', (event) => {
-            event.preventDefault();
-        });
-        setEventListeners (formElement);
-    });
-}
-
-enableValidation (); 
-*/
+export { validationConfig, enableValidation };
