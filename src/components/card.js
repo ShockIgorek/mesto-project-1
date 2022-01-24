@@ -28,6 +28,9 @@ const initialCards = [
 ];
 const popupImg = document.querySelector('#popup-img');
 const containerCards = document.querySelector('.cards');
+const popupContainerImg = document.querySelector('.popup__container-img');
+const popupImage = popupContainerImg.querySelector('.popup__img');
+const popupName = popupContainerImg.querySelector('.popup__name');
 
 function createCard(name, link) {
   const cardTemplate = document.querySelector('#card').cloneNode(true).content;
@@ -51,10 +54,6 @@ function createCard(name, link) {
   cardBtnTrashBin.addEventListener('click', deleteCard);
 
   function openFullImage() {
-    const popupContainerImg = document.querySelector('.popup__container-img');
-    const popupImage = popupContainerImg.querySelector('.popup__img');
-    const popupName = popupContainerImg.querySelector('.popup__name');
-
     popupImage.setAttribute('src', link); 
     popupImage.setAttribute('alt', name);
     popupName.textContent = name;

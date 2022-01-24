@@ -43,13 +43,13 @@ function hasInvalidInput (inputList) {
 
 //кнопка в состояние disable
 function disableButton (buttonElement, inactiveButtonClass) {
-    buttonElement.classList.toggle(inactiveButtonClass);
+    buttonElement.classList.add(inactiveButtonClass);
     buttonElement.disabled = true;
 };
 
 //кнопка в состояние undisable
 function enablaButton (buttonElement, inactiveButtonClass) {
-    buttonElement.classList.toggle(inactiveButtonClass);
+    buttonElement.classList.remove(inactiveButtonClass);
     buttonElement.disabled = false;
 };
 
@@ -89,4 +89,4 @@ function enableValidation ({formSelector, ...rest}) {
     });
 };
 
-export { validationConfig, enableValidation };
+export { validationConfig, enableValidation, disableButton };
