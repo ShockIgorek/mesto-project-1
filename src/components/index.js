@@ -1,7 +1,7 @@
 import '../index.css';
 import { validationConfig, enableValidation, disableButton } from './validate';
 import { initialCards, popupImg, createCard, renderCard, containerCards } from './card';
-import { profileEditPopup, popupAdd, popupFormAdd, openPopup, closePopup, closeByKeyPopup, clickClosePopupForm } from './modal';
+import { profileEditPopup, popupAdd, popupFormAdd, openPopup, closePopup } from './modal';
 
 const cardsContainer = document.querySelector('.cards');
 const popupContainer = profileEditPopup.querySelector('.popup__container'); 
