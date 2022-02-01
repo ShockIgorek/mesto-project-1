@@ -1,13 +1,17 @@
 .profile__avatar {
     max-width: 120px;
     max-height: 120px;
+    min-height: 120px;
+    object-fit: cover;
     border-radius: 180px;
+    z-index: 0;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .profile__avatar {
         max-width: 100px;
         max-height: 100px;
+        min-height: 100px;
     }
 }
 

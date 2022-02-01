@@ -11,8 +11,9 @@
     cursor: pointer;
     opacity: 1;
     transition:  0.5s linear;
+    visibility: hidden;
 }
 
 .card__trash-bin:hover {
     opacity: 0.5;
-}
+} 

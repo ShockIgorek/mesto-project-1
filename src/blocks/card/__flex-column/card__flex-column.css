@@ -1,7 +1,8 @@
 .card__flex-column {
     min-width: 266px;
-    padding-top: 25px;
-    padding-bottom: 31px; 
+    max-height: 85px;
+    padding-top: 15px;
+    padding-bottom: 20px; 
     display: flex;
     justify-content: space-between;
 }

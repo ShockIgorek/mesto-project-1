@@ -1,4 +1,5 @@
 .profile__column-main {
+    position: relative;
     width: 508px;
     display: flex;
     justify-content: space-between;
