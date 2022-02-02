@@ -30,6 +30,8 @@ const getInfo = () => {
     });
 }
 
+let idCard;
+
 const getCards = () => {
     getInfo();
     return fetch(`${config.baseUrl}cards`, {
@@ -45,6 +47,7 @@ const getCards = () => {
 
     .then((result) => {
         initialAllCards(result);
+        idCard = result._id;
     })
 }
 
@@ -61,19 +64,21 @@ const sendInfo = (myName, aboutMe) => {
             name: myName,
             about: aboutMe
         })
-    }); 
+    })
+    .finally(() => {popupBtnSave.textContent = 'Сохранить';}) 
 }
 
 const addNewCard = (namePlace, placeLink) => {
     popupBtnCreate.textContent = 'Создание...';
-    fetch (`${config.baseUrl}cards`, {
+    return fetch (`${config.baseUrl}cards`, {
         method: 'POST',
         headers: config.headers, 
         body: JSON.stringify({
             name: namePlace,
             link: placeLink
         })
-    });
+    })
+    .finally(() => {popupBtnCreate.textContent = 'Создать';})
 }
 
 const deleteUserCard = (id) => {
@@ -134,6 +139,7 @@ const updateAvatarUser = (imgLink) => {
 
     Promise.reject(`Что-то пошло не так: ${res.status}`)
     })
+    .finally(() => {popupAvatarBtnSave.textContent = 'Сохранить';}) 
 }
 
-export { meId, getInfo, getCards, sendInfo, getAppInfo, addNewCard, deleteUserCard, addLikeCard, removeLikeCard, updateAvatarUser };
+export { meId, idCard, getInfo, getCards, sendInfo, getAppInfo, addNewCard, deleteUserCard, addLikeCard, removeLikeCard, updateAvatarUser };
