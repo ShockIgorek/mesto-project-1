@@ -23,9 +23,6 @@ function createCard(name, link, likesCount, ownerId, likes, cardId) {
   cardImage.setAttribute('alt', name);
   cardText.textContent = name;
 
-/*  const temp = cardTemplate.querySelector('#temp');
-  temp.id = cardId; */
-
   if (meId == ownerId) {
     cardBtnTrashBin.classList.add('card__trash-bin_visible');
   } 
@@ -38,12 +35,10 @@ function createCard(name, link, likesCount, ownerId, likes, cardId) {
     if (cardBtnHeart.classList.contains('card__heart_active')) {
       cardLikes.textContent = parseInt(cardLikes.textContent) - 1;
       cardBtnHeart.classList.remove('card__heart_active');
-      //removeLikeCard(event.target.closest('.card').id);
       removeLikeCard(cardId);
     } else {
       cardLikes.textContent = parseInt(cardLikes.textContent) + 1;
       cardBtnHeart.classList.add('card__heart_active');
-      //addLikeCard(event.target.closest('.card').id);
       addLikeCard(cardId);
     }
   }

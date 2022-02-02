@@ -39,8 +39,6 @@ function initialAllCards(arrCard) {
   arrCard.reverse().forEach(element => {
     const newCard = createCard(element.name, element.link, element.likes.length, element.owner._id, element.likes, element._id);
     renderCard(newCard, cardsContainer);
-    //const temp = document.querySelector('#temp');
-    //temp.id = element._id;
   });
 }
 
@@ -87,10 +85,6 @@ function addFormSubmitHandler (evt) {
   addNewCard(imgNameField.value, imgLinkField.value)
     .then((cardData) => {
       return cardData.json();
-      //const newCard = createCard(imgNameField.value, imgLinkField.value, 0, meId, [], cardData._id);
-      const newCard = createCard(cardData.name, cardData.link, 0, meId, [], cardData._id);
-      console.log(`Имя - ${cardData.name}, Ссылка - ${cardData.link}, лайки - ${cardData.likes}`);
-      renderCard(newCard, containerCards);
     })
     .then((card) => {
       const newCard = createCard(card.name, card.link, card.likes.length, card.owner._id, card.likes, card._id);
