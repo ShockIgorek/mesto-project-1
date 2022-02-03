@@ -1,5 +1,6 @@
 import { closePopup, openPopup, popupDeleteCard } from "./modal";
-import { meId, idCard, deleteUserCard, addLikeCard, removeLikeCard } from "./api";
+import { deleteUserCard, addLikeCard, removeLikeCard } from "./api";
+import { meId } from "./index";
 
 const popupImg = document.querySelector('#popup-img');
 const containerCards = document.querySelector('.cards');
@@ -7,8 +8,8 @@ const popupContainerImg = document.querySelector('.popup__container-img');
 const popupImage = popupContainerImg.querySelector('.popup__img');
 const popupName = popupContainerImg.querySelector('.popup__name');
 const agreeDeleteCard = popupDeleteCard.querySelector('#delete-button');
-let ItemCard;
-let ItemCardId;
+let itemCard;
+let itemCardId;
 
 function createCard(name, link, likesCount, ownerId, likes, cardId) {
   const cardTemplate = document.querySelector('#card').cloneNode(true).content;
@@ -17,7 +18,6 @@ function createCard(name, link, likesCount, ownerId, likes, cardId) {
   const cardBtnTrashBin = cardTemplate.querySelector('.card__trash-bin');
   const cardImage = cardTemplate.querySelector('.card__image');
   const cardText = cardTemplate.querySelector('.card__text');
-  ItemCardId = cardId;
   cardLikes.textContent = likesCount;
   cardImage.setAttribute('src', link);
   cardImage.setAttribute('alt', name);
@@ -32,21 +32,28 @@ function createCard(name, link, likesCount, ownerId, likes, cardId) {
   }
 
   function likedHeart() {    
-    if (cardBtnHeart.classList.contains('card__heart_active')) {
-      cardLikes.textContent = parseInt(cardLikes.textContent) - 1;
-      cardBtnHeart.classList.remove('card__heart_active');
-      removeLikeCard(cardId);
+      if (cardBtnHeart.classList.contains('card__heart_active')) {
+        removeLikeCard(cardId)
+          .then((result) => {
+            cardLikes.textContent = result.likes.length;
+            cardBtnHeart.classList.remove('card__heart_active');  
+          }) 
+          .catch(err => console.log(`Что-то пошло не так: ${err}`));
     } else {
-      cardLikes.textContent = parseInt(cardLikes.textContent) + 1;
-      cardBtnHeart.classList.add('card__heart_active');
-      addLikeCard(cardId);
+      addLikeCard(cardId)
+        .then((result) => {
+          cardLikes.textContent = result.likes.length;
+          cardBtnHeart.classList.add('card__heart_active');
+        })
+        .catch(err => console.log(`Что-то пошло не так: ${err}`));
     }
   }
   cardBtnHeart.addEventListener('click', likedHeart);
   
-  cardBtnTrashBin.addEventListener('click', function() {
+  cardBtnTrashBin.addEventListener('click', function(event) {
       openPopup(popupDeleteCard); 
-      ItemCard = event.target.closest('.card');
+      itemCard = event.target.closest('.card');
+      itemCardId = cardId;
   });
 
   function openFullImage() {
@@ -66,11 +73,14 @@ function renderCard (cardTemplate, containerCards) {
 }
 
 function deleteCard(card) {
-  closePopup(popupDeleteCard);
-  deleteUserCard(ItemCardId);
-  card.remove(); 
+  deleteUserCard(itemCardId)
+    .then(() => {
+      closePopup(popupDeleteCard);
+      card.remove(); 
+    })
+    .catch(err => console.log(`Что-то пошло не так: ${err}`))
 }
 
-agreeDeleteCard.addEventListener('click', () => {deleteCard(ItemCard)}); 
+agreeDeleteCard.addEventListener('click', () => {deleteCard(itemCard)}); 
 
 export { popupImg, containerCards, createCard, renderCard };

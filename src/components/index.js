@@ -1,5 +1,5 @@
 import '../index.css';
-import { meId, idCard, sendInfo, getCards, addNewCard, getAppInfo, updateAvatarUser } from './api';
+import { sendInfo, addNewCard, getAppInfo, updateAvatarUser } from './api';
 import { validationConfig, enableValidation, disableButton } from './validate';
 import { popupImg, createCard, renderCard, containerCards } from './card';
 import { profileEditPopup, popupAdd, popupFormAdd, popupAvatar, popupDeleteCard, openPopup, closePopup } from './modal';
@@ -9,6 +9,9 @@ const popupContainer = profileEditPopup.querySelector('.popup__container');
 const profileEdit = document.querySelector('.profile__edit');
 const profileAdd = document.querySelector('.profile__add');
 const profileAvatar = document.querySelector('.profile__avatar-edit');
+const profileName = document.querySelector('.profile__name');
+const profileCareer = document.querySelector('.profile__career');
+const profileAvatarImg = document.querySelector('.profile__avatar');
 const popupExit = popupContainer.querySelector('.popup__exit');
 const closeAvatar = popupAvatar.querySelector('.popup__exit');
 const exitBtn = document.querySelector('#exit-button');
@@ -24,18 +27,28 @@ const profileNameContent = document.querySelector('.profile__name');
 const profileCareerContent = document.querySelector('.profile__career');
 const imgNameField = document.querySelector('#img-name-field');
 const imgLinkField = document.querySelector('#img-link-field');
+const imgAvatarField = popupAvatar.querySelector('.popup__edit');
 const popupBtnCreate = document.querySelector('#create-button');
 const popupBtnSave = document.querySelector('#save-button');
 const popupAvatarBtnSave = popupAvatar.querySelector('#save-avatar-btn');
+let meId;
+let idCard;
 
 getAppInfo()
   .then(([user, cards]) => {
+    changeElementTextContent(profileName, user.name); 
+    changeElementTextContent(profileCareer, user.about);
+    changeAvatar(profileAvatarImg, user.avatar);
+    meId = user._id; 
+
+    renderAllCards(cards);
+    idCard = cards._id;
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
 
 enableValidation(validationConfig);
 
-function initialAllCards(arrCard) {
+function renderAllCards(arrCard) {
   arrCard.reverse().forEach(element => {
     const newCard = createCard(element.name, element.link, element.likes.length, element.owner._id, element.likes, element._id);
     renderCard(newCard, cardsContainer);
@@ -53,47 +66,58 @@ function changeAvatar(elementDOM, objValue) {
 }
 
 function fillEditForm() {   
-  const profileName = document.querySelector('.profile__name').textContent;
-  const profileCareer = document.querySelector('.profile__career').textContent;
-  popupUserName.setAttribute('value', profileName);
-  popupUserCareer.setAttribute('value', profileCareer);
+  popupUserName.setAttribute('value', profileName.textContent);
+  popupUserCareer.setAttribute('value', profileCareer.textContent);
 }
 
-function changeAvatarSubmitHandler (evt) {
+function disableBtn(elementDOM) {
+  elementDOM.disabled = true;
+}
+
+function handleAvatarSubmit (evt) {
   evt.preventDefault();
   
-  const imgAvatarField = popupAvatar.querySelector('.popup__edit');
   const avatarLink = imgAvatarField.value;
 
-  changeAvatar(document.querySelector('.profile__avatar'), avatarLink);
-  closePopup(popupAvatar);
-  updateAvatarUser(avatarLink);
+  updateAvatarUser(avatarLink)
+    .then(() => {
+      changeAvatar(profileAvatarImg, avatarLink);
+      closePopup(popupAvatar);
+    })
+    .catch(err => console.log(`Что-то пошло не так: ${err}`))
+    .finally(() => {popupAvatarBtnSave.textContent = 'Сохранить';}) 
+    popupAvatarBtnSave.textContent = 'Сохранение...';
 }
 
-function editFormSubmitHandler (evt) {
+function handleUserInfoFormSubmit (evt) {
   evt.preventDefault();
 
-  profileNameContent.textContent = userNameField.value;
-  profileCareerContent.textContent = userCareerField.value;
-  sendInfo(userNameField.value, userCareerField.value);
-  closePopup(profileEditPopup);
+  sendInfo(userNameField.value, userCareerField.value)
+    .then((userInfo) => {
+      profileNameContent.textContent = userInfo.name;
+      profileCareerContent.textContent = userInfo.about;
+      closePopup(profileEditPopup);
+    })
+    .catch(err => console.log(`Что-то пошло не так: ${err}`))
+    .finally(() => {popupBtnSave.textContent = 'Сохранить';});
+    popupBtnSave.textContent = 'Сохранение...';
 }
 
-function addFormSubmitHandler (evt) {
+function handleCardInfoFormSubmit (evt) {
   evt.preventDefault();
 
   addNewCard(imgNameField.value, imgLinkField.value)
-    .then((cardData) => {
-      return cardData.json();
-    })
     .then((card) => {
       const newCard = createCard(card.name, card.link, card.likes.length, card.owner._id, card.likes, card._id);
       renderCard(newCard, containerCards);
+      disableButton (popupBtnCreate, validationConfig.inactiveButtonClass);
+      closePopup(popupAdd);
+      popupFormAdd.reset(); 
     })
-    
-  disableButton (popupBtnCreate, validationConfig.inactiveButtonClass);
-  closePopup(popupAdd);
-  popupFormAdd.reset(); 
+    .catch(err => console.log(`Что-то пошло не так: ${err}`))
+    .finally(() => {popupBtnCreate.textContent = 'Создать';});
+    popupBtnCreate.textContent = 'Создание...';  
+    disableBtn(popupBtnCreate);
 }
 
 profileAvatar.addEventListener('click', function() {openPopup(popupAvatar)});
@@ -107,8 +131,8 @@ exitBtn.addEventListener('click', function() {closePopup(popupAdd)});
 popupExitImg.addEventListener('click', function() {closePopup(popupImg)});
 closeDelCard.addEventListener('click', function() {closePopup(popupDeleteCard)});
 
-popupFormAvatar.addEventListener('submit', changeAvatarSubmitHandler);
-popupFormEdit.addEventListener('submit', editFormSubmitHandler);
-popupFormAdd.addEventListener('submit', addFormSubmitHandler);
+popupFormAvatar.addEventListener('submit', handleAvatarSubmit);
+popupFormEdit.addEventListener('submit', handleUserInfoFormSubmit);
+popupFormAdd.addEventListener('submit', handleCardInfoFormSubmit);
 
-export { popupBtnCreate, popupBtnSave, popupAvatarBtnSave, initialAllCards, changeElementTextContent, changeAvatar }
+export { meId, idCard, popupBtnCreate, popupBtnSave, popupAvatarBtnSave, changeElementTextContent, changeAvatar }

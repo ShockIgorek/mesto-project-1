@@ -1,5 +1,3 @@
-import { popupBtnCreate, popupBtnSave, popupAvatarBtnSave, changeElementTextContent, changeAvatar, initialAllCards } from './index.js';
-
 const config = {
     baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6/',
     headers: {
@@ -8,47 +6,26 @@ const config = {
     }
 };
 
-let meId;
+const checkResponse = (res) => {
+    if (res.ok) {
+        return res.json();
+    }
+    return Promise.reject(`Ошибка ${res.status}`);
+}
 
 const getInfo = () => {
     return fetch(`${config.baseUrl}users/me`, {
         headers: config.headers
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-    }
-    
-    return Promise.reject(`Что-то пошло не так: ${res.status}`);
-    })
-
-    .then((result) => {
-        changeElementTextContent(document.querySelector('.profile__name'), result.name); 
-        changeElementTextContent(document.querySelector('.profile__career'), result.about);
-        changeAvatar(document.querySelector('.profile__avatar'), result.avatar);
-        meId = result._id; 
-    });
+    .then(res => checkResponse(res));
 }
-
-let idCard;
 
 const getCards = () => {
     getInfo();
     return fetch(`${config.baseUrl}cards`, {
         headers: config.headers
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-
-    return Promise.reject(`Что-то пошло не так: ${res.status}`); 
-    })
-
-    .then((result) => {
-        initialAllCards(result);
-        idCard = result._id;
-    })
+    .then(res => checkResponse(res));
 }
 
 const getAppInfo = () => {
@@ -56,8 +33,7 @@ const getAppInfo = () => {
 }
 
 const sendInfo = (myName, aboutMe) => {
-    popupBtnSave.textContent = 'Сохранение...';
-    fetch (`${config.baseUrl}users/me`, {
+    return fetch (`${config.baseUrl}users/me`, {
         method: 'PATCH', 
         headers: config.headers,
         body: JSON.stringify({
@@ -65,11 +41,10 @@ const sendInfo = (myName, aboutMe) => {
             about: aboutMe
         })
     })
-    .finally(() => {popupBtnSave.textContent = 'Сохранить';}) 
+    .then(res => checkResponse(res));
 }
 
 const addNewCard = (namePlace, placeLink) => {
-    popupBtnCreate.textContent = 'Создание...';
     return fetch (`${config.baseUrl}cards`, {
         method: 'POST',
         headers: config.headers, 
@@ -78,68 +53,42 @@ const addNewCard = (namePlace, placeLink) => {
             link: placeLink
         })
     })
-    .finally(() => {popupBtnCreate.textContent = 'Создать';})
+    .then(res => checkResponse(res));
 }
 
 const deleteUserCard = (id) => {
-    fetch (`${config.baseUrl}cards/${id}`, {
+    return fetch (`${config.baseUrl}cards/${id}`, {
         method: 'DELETE',
         headers: config.headers
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-
-    Promise.reject(`Что-то пошло не так: ${res.status}`); 
-    })
+    .then(res => checkResponse(res));
 }
 
 const addLikeCard = (id) => {
-    fetch (`${config.baseUrl}cards/likes/${id}`, {
+    return fetch (`${config.baseUrl}cards/likes/${id}`, {
         method: 'PUT', 
         headers: config.headers
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-
-    Promise.reject(`Что-то пошло не так: ${res.status}`)
-    })
+    .then(res => checkResponse(res));
 }
 
 const removeLikeCard = (id) => {
-    fetch (`${config.baseUrl}cards/likes/${id}`, {
+    return fetch (`${config.baseUrl}cards/likes/${id}`, {
         method: 'DELETE',
         headers: config.headers
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-
-    Promise.project(`Что-то пошло не так: ${res.status}`);
-    })
+    .then(res => checkResponse(res));
 }
 
 const updateAvatarUser = (imgLink) => {
-    popupAvatarBtnSave.textContent = 'Сохранение...';
-    fetch (`${config.baseUrl}/users/me/avatar`, {
+    return fetch (`${config.baseUrl}/users/me/avatar`, {
         method: 'PATCH',
         headers: config.headers,
         body: JSON.stringify({
             avatar: `${imgLink}`
         })
     })
-    .then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-
-    Promise.reject(`Что-то пошло не так: ${res.status}`)
-    })
-    .finally(() => {popupAvatarBtnSave.textContent = 'Сохранить';}) 
+    .then(res => checkResponse(res));
 }
 
-export { meId, idCard, getInfo, getCards, sendInfo, getAppInfo, addNewCard, deleteUserCard, addLikeCard, removeLikeCard, updateAvatarUser };
+export { getInfo, getCards, sendInfo, getAppInfo, addNewCard, deleteUserCard, addLikeCard, removeLikeCard, updateAvatarUser };
