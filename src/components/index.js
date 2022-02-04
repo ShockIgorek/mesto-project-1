@@ -70,10 +70,6 @@ function fillEditForm() {
   popupUserCareer.setAttribute('value', profileCareer.textContent);
 }
 
-function disableBtn(elementDOM) {
-  elementDOM.disabled = true;
-}
-
 function handleAvatarSubmit (evt) {
   evt.preventDefault();
   
@@ -117,7 +113,6 @@ function handleCardInfoFormSubmit (evt) {
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
     .finally(() => {popupBtnCreate.textContent = 'Создать';});
     popupBtnCreate.textContent = 'Создание...';  
-    disableBtn(popupBtnCreate);
 }
 
 profileAvatar.addEventListener('click', function() {openPopup(popupAvatar)});
