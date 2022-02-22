@@ -1,8 +1,9 @@
 import '../index.css';
 import { api } from './api-oop';
+import { formValidator, validationConfig } from './validate-oop';
 
 import { sendInfo, addNewCard, getAppInfo, updateAvatarUser } from './api';
-import { validationConfig, enableValidation, disableButton } from './validate';
+//import { validationConfig, enableValidation, disableButton } from './validate';
 import { popupImg, createCard, renderCard, containerCards } from './card';
 import { profileEditPopup, popupAdd, popupFormAdd, popupAvatar, popupDeleteCard, openPopup, closePopup } from './modal';
 
@@ -48,8 +49,9 @@ api.getAppInfo()
     idCard = cards._id;
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
-
-enableValidation(validationConfig);
+  
+  formValidator.enableValidation();
+//enableValidation(validationConfig);
 
 function renderAllCards(arrCard) {
   arrCard.reverse().forEach(element => {
@@ -112,7 +114,9 @@ function handleCardInfoFormSubmit (evt) {
     .then((card) => {
       const newCard = createCard(card.name, card.link, card.likes.length, card.owner._id, card.likes, card._id);
       renderCard(newCard, containerCards);
-      disableButton (popupBtnCreate, validationConfig.inactiveButtonClass);
+
+      formValidator.disableButton(popupBtnCreate);
+      //disableButton (popupBtnCreate, validationConfig.inactiveButtonClass);
       closePopup(popupAdd);
       popupFormAdd.reset(); 
     })
