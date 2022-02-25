@@ -1,14 +1,14 @@
 import { api } from "./api-oop";
-import { closePopup, openPopup, popupDeleteCard } from "./modal";
-import { deleteUserCard, addLikeCard, removeLikeCard } from "./api";
+import { popupImg, popupDeleteCard } from "./popup";
+import { popupWithImage } from "./popupWithImage";
 import { meId } from "./index";
 
-const popupImg = document.querySelector('#popup-img');
 const containerCards = document.querySelector('.cards');
 const popupContainerImg = document.querySelector('.popup__container-img');
 const popupImage = popupContainerImg.querySelector('.popup__img');
 const popupName = popupContainerImg.querySelector('.popup__name');
-const agreeDeleteCard = popupDeleteCard.querySelector('#delete-button');
+const popupDelCard = document.querySelector('#popup-delete-card');
+const agreeDeleteCard = popupDelCard.querySelector('#delete-button');
 let itemCard;
 let itemCardId;
 
@@ -54,16 +54,16 @@ function createCard(name, link, likesCount, ownerId, likes, cardId) {
   cardBtnHeart.addEventListener('click', likedHeart);
   
   cardBtnTrashBin.addEventListener('click', function(event) {
-      openPopup(popupDeleteCard); 
+    popupDeleteCard.open();  
+    //openPopup(popupDeleteCard); 
       itemCard = event.target.closest('.card');
       itemCardId = cardId;
   });
 
+  //popupWithImage.open(popupImage, popupName);
+
   function openFullImage() {
-    popupImage.setAttribute('src', link); 
-    popupImage.setAttribute('alt', name);
-    popupName.textContent = name;
-    openPopup(popupImg);
+    popupWithImage.open(popupName, link, name);
   }
 
   cardImage.addEventListener('click', function() {openFullImage()});
@@ -77,9 +77,8 @@ function renderCard (cardTemplate, containerCards) {
 
 function deleteCard(card) {
   api.deleteUserCard(itemCardId)
-  //deleteUserCard(itemCardId)
     .then(() => {
-      closePopup(popupDeleteCard);
+      popupDeleteCard.close();
       card.remove(); 
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
