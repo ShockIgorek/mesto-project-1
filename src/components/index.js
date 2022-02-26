@@ -93,7 +93,9 @@ function renderAllCards(arrCard) {
       cardId: element._id
     }
     const newCard = new Card(data);
-    renderCard(newCard, cardsContainer);
+    console.log(newCard)
+    newCard.renderCard()
+    // renderCard(newCard, cardsContainer);
   });
 }
 
