@@ -39,7 +39,7 @@ export class Card {
 
     _setEventListeners() {
         // увеличение
-        this._cardImage.addEventListener('click', function () {
+        this._cardImage.addEventListener('click', () => {
             this._openFullImage()
         });
         // удаление
