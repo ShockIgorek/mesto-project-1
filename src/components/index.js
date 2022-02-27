@@ -157,18 +157,20 @@ function handleCardInfoFormSubmit(evt) {
   api.addNewCard(imgNameField.value, imgLinkField.value)
     //addNewCard(imgNameField.value, imgLinkField.value)
     .then((card) => {
+      console.log(card);
       const data = {
-        name: element.name,
-        link: element.link,
-        likesCount: element.likes.length,
-        ownerId: element.owner._id,
-        likes: element.likes,
-        cardId: element._id
+        name: card.name,
+        link: card.link,
+        likesCount: card.likes.length,
+        ownerId: card.owner._id,
+        likes: card.likes,
+        cardId: card._id
       }
+      console.log(data);
       const newCard = new Card(data);
-      newCard()
+      newCard.renderCard()
       disableButton(popupBtnCreate, validationConfig.inactiveButtonClass);
-      popupCardAdd.close;
+      popupCardAdd.close();
       //closePopup(popupAdd);
       popupFormAdd.reset();
     })

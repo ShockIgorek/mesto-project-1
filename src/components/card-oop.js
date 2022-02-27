@@ -14,8 +14,9 @@ import {
 } from "./index";
 const popupContainerImg = document.querySelector('.popup__container-img');
 const popupDelCard = document.querySelector('#popup-delete-card');
-const agreeDeleteCard = popupDelCard.querySelector('#delete-button');
 const popupName = popupContainerImg.querySelector('.popup__name');
+const agreeDeleteCard = popupDelCard.querySelector('#delete-button');
+
 export class Card {
     constructor(data) {
         this._name = data.name;
@@ -36,19 +37,27 @@ export class Card {
         popupWithImage.open(popupName, this._link, this._name);
     }
 
-
+    _deleteCard() {
+        api.deleteUserCard(this.itemCardId)
+            .then(() => {                
+                popupDeleteCard.close();
+                this.itemCard.remove();
+            })
+            .catch(err => console.log(`Что-то пошло не так: ${err}`))
+    }
     _setEventListeners() {
+        agreeDeleteCard.addEventListener('click', () => {this._deleteCard(this.itemCardId)}); 
         // увеличение
         this._cardImage.addEventListener('click', () => {
             this._openFullImage()
         });
         // удаление
-        this._deleteBtn.addEventListener('click', () => {
-            popupDeleteCard.open();
+        this._deleteBtn.addEventListener('click', (evt) => {
+            popupDeleteCard.open(); 
+            this.itemCard = evt.target.closest('.card');
+            // this.itemCardId = cardId;
+
         })
-        agreeDeleteCard.addEventListener('click', () => {
-            this.deleteCard()
-        });
         // лайк
         this._likeBtn.addEventListener('click', () => {
             this.likedHeart()
@@ -56,16 +65,7 @@ export class Card {
 
     }
 
-    deleteCard() {
-        api.deleteUserCard(this._cardId)
-            //deleteUserCard(itemCardId)
-            .then(() => {
-                popupDeleteCard.close();
-                //closePopup(popupDeleteCard);
-                card.remove();
-            })
-            .catch(err => console.log(`Что-то пошло не так: ${err}`))
-    }
+
     createCard() {
         this._element = this._getTemplate();
         this._image = this._element.querySelector('.card__image');;
