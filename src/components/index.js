@@ -1,13 +1,30 @@
 import '../index.css';
-import { api } from './api';
-import { formValidator } from './validate';
-import { popupAvatar, popupProfileEdit, popupCardAdd, popupImg, popupDeleteCard } from './popup';
+import {
+  api
+} from './api.js';
+import {
+  popupAvatar,
+  popupProfileEdit,
+  popupCardAdd,
+  popupImg,
+  popupDeleteCard
+} from './popup.js';
+
+
+import {
+  formValidator,
+  disableButton
+} from './validate.js';
+// import { /*popupImg,*/ createCard, renderCard, containerCards } from './card';
 import { userInfo } from './UserInfo';
-import { createCard, renderCard, containerCards } from './card';
+import {
+  Card
+} from './card-oop';
+//import { /*profileEditPopup,*/ popupAdd, popupFormAdd, popupAvatar, popupDeleteCard, openPopup, closePopup } from './modal';
 
 const cardsContainer = document.querySelector('.cards');
 const profileEditPopup = document.querySelector('#popup-edit');
-const popupContainer = profileEditPopup.querySelector('.popup__container'); 
+const popupContainer = profileEditPopup.querySelector('.popup__container');
 const profileEdit = document.querySelector('.profile__edit');
 const profileAdd = document.querySelector('.profile__add');
 const profileAvatar = document.querySelector('.profile__avatar-edit');
@@ -43,7 +60,7 @@ api.getAppInfo()
   .then(([user, cards]) => {
     userInfo.getUserInfo();
     changeAvatar(profileAvatarImg, user.avatar);
-    meId = user._id; 
+    meId = user._id;
 
     renderAllCards(cards);
     idCard = cards._id;
@@ -54,8 +71,17 @@ api.getAppInfo()
 
 function renderAllCards(arrCard) {
   arrCard.reverse().forEach(element => {
-    const newCard = createCard(element.name, element.link, element.likes.length, element.owner._id, element.likes, element._id);
-    renderCard(newCard, cardsContainer);
+    const data = {
+      name: element.name,
+      link: element.link,
+      likesCount: element.likes.length,
+      ownerId: element.owner._id,
+      likes: element.likes,
+      cardId: element._id
+    }
+    const newCard = new Card(data);
+    newCard.renderCard()
+    // renderCard(newCard, cardsContainer);
   });
 }
 
@@ -69,14 +95,14 @@ function changeAvatar(elementDOM, objValue) {
   element.src = objValue;
 }
 
-function fillEditForm() {   
+function fillEditForm() {
   popupUserName.setAttribute('value', profileName.textContent);
   popupUserCareer.setAttribute('value', profileCareer.textContent);
 }
 
-function handleAvatarSubmit (evt) {
+function handleAvatarSubmit(evt) {
   evt.preventDefault();
-  
+
   const avatarLink = imgAvatarField.value;
 
   api.updateAvatarUser(avatarLink)
@@ -85,11 +111,13 @@ function handleAvatarSubmit (evt) {
       popupAvatar.close();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
-    .finally(() => {popupAvatarBtnSave.textContent = 'Сохранить';}) 
-    popupAvatarBtnSave.textContent = 'Сохранение...';
+    .finally(() => {
+      popupAvatarBtnSave.textContent = 'Сохранить';
+    })
+  popupAvatarBtnSave.textContent = 'Сохранение...';
 }
 
-function handleUserInfoFormSubmit (evt) {
+function handleUserInfoFormSubmit(evt) {
   evt.preventDefault();
   popupBtnSave.textContent = 'Сохранение...';
   userInfo.setUserInfo(userNameField.value, userCareerField.value);
@@ -97,22 +125,34 @@ function handleUserInfoFormSubmit (evt) {
   popupProfileEdit.close()
 }
 
-function handleCardInfoFormSubmit (evt) {
+function handleCardInfoFormSubmit(evt) {
   evt.preventDefault();
 
   api.addNewCard(imgNameField.value, imgLinkField.value)
+    //addNewCard(imgNameField.value, imgLinkField.value)
     .then((card) => {
-      const newCard = createCard(card.name, card.link, card.likes.length, card.owner._id, card.likes, card._id);
-      renderCard(newCard, containerCards);
-
+      const data = {
+        name: card.name,
+        link: card.link,
+        likesCount: card.likes.length,
+        ownerId: card.owner._id,
+        likes: card.likes,
+        cardId: card._id
+      }
+      const newCard = new Card(data);
+      newCard.renderCard()
       formValidator.disableButton(popupBtnCreate);
       popupCardAdd.close();
-      popupFormAdd.reset(); 
+      //closePopup(popupAdd);
+      popupFormAdd.reset();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
-    .finally(() => {popupBtnCreate.textContent = 'Создать';});
-    popupBtnCreate.textContent = 'Создание...';  
+    .finally(() => {
+      popupBtnCreate.textContent = 'Создать';
+    });
+  popupBtnCreate.textContent = 'Создание...';
 }
+
 
 profileAvatar.addEventListener('click', function() {popupAvatar.open()});
 profileEdit.addEventListener('click', function() {popupProfileEdit.open()});
@@ -125,8 +165,17 @@ exitBtn.addEventListener('click', function() {popupCardAdd.close()});
 popupExitImg.addEventListener('click', function() {popupImg.close()});
 closeDelCard.addEventListener('click', function() {popupDeleteCard.close()});
 
+
 popupFormAvatar.addEventListener('submit', handleAvatarSubmit);
 popupFormEdit.addEventListener('submit', handleUserInfoFormSubmit);
 popupFormAdd.addEventListener('submit', handleCardInfoFormSubmit);
 
-export { meId, idCard, popupBtnCreate, popupBtnSave, popupAvatarBtnSave, changeElementTextContent, changeAvatar }
+export {
+  meId,
+  idCard,
+  popupBtnCreate,
+  popupBtnSave,
+  popupAvatarBtnSave,
+  changeElementTextContent,
+  changeAvatar
+}

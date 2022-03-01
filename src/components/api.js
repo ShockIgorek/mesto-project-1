@@ -80,7 +80,7 @@ class Api {
             method: 'DELETE',
             headers: this._headers
         })
-        .then(res => checkResponse(res));
+        .then(res => this._checkResponse(res));
     }
     
     updateAvatarUser(imgLink) {
