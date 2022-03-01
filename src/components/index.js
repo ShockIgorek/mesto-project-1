@@ -16,12 +16,15 @@ import {
   disableButton
 } from './validate.js';
 // import { /*popupImg,*/ createCard, renderCard, containerCards } from './card';
-import { userInfo } from './UserInfo';
+import {
+  userInfo
+} from './UserInfo';
 import {
   Card
 } from './card-oop';
-//import { /*profileEditPopup,*/ popupAdd, popupFormAdd, popupAvatar, popupDeleteCard, openPopup, closePopup } from './modal';
-
+import {
+  PopupWithForm
+} from './popupWithForm.js';
 const cardsContainer = document.querySelector('.cards');
 const profileEditPopup = document.querySelector('#popup-edit');
 const popupContainer = profileEditPopup.querySelector('.popup__container');
@@ -55,6 +58,10 @@ const popupFormAdd = document.querySelector('#popup-form-add');
 let meId;
 let idCard;
 
+console.log(document.querySelector('#popup-avatar'))
+const test = new PopupWithForm(document.querySelector('#popup-avatar'))
+console.log(test._getInputValues())
+
 
 api.getAppInfo()
   .then(([user, cards]) => {
@@ -66,8 +73,8 @@ api.getAppInfo()
     idCard = cards._id;
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
-  
-  formValidator.enableValidation();
+
+formValidator.enableValidation();
 
 function renderAllCards(arrCard) {
   arrCard.reverse().forEach(element => {
@@ -100,8 +107,8 @@ function fillEditForm() {
   popupUserCareer.setAttribute('value', profileCareer.textContent);
 }
 
-function handleAvatarSubmit(evt) {
-  evt.preventDefault();
+function handleAvatarSubmit() {
+  // evt.preventDefault();
 
   const avatarLink = imgAvatarField.value;
 
@@ -154,21 +161,45 @@ function handleCardInfoFormSubmit(evt) {
 }
 
 
-profileAvatar.addEventListener('click', function() {popupAvatar.open()});
-profileEdit.addEventListener('click', function() {popupProfileEdit.open()});
+profileAvatar.addEventListener('click', function () {
+  popupAvatar.open()
+});
+profileEdit.addEventListener('click', function () {
+  popupProfileEdit.open()
+});
 profileEdit.addEventListener('click', fillEditForm);
-profileAdd.addEventListener('click', function() {popupCardAdd.open()});
+profileAdd.addEventListener('click', function () {
+  popupCardAdd.open()
+});
 
-closeAvatar.addEventListener('click', function() {popupAvatar.close()});
-popupExit.addEventListener('click', function() {popupProfileEdit.close()});
-exitBtn.addEventListener('click', function() {popupCardAdd.close()});
-popupExitImg.addEventListener('click', function() {popupImg.close()});
-closeDelCard.addEventListener('click', function() {popupDeleteCard.close()});
+closeAvatar.addEventListener('click', function () {
+  popupAvatar.close()
+});
+popupExit.addEventListener('click', function () {
+  popupProfileEdit.close()
+});
+exitBtn.addEventListener('click', function () {
+  popupCardAdd.close()
+});
+popupExitImg.addEventListener('click', function () {
+  popupImg.close()
+});
+closeDelCard.addEventListener('click', function () {
+  popupDeleteCard.close()
+});
 
 
-popupFormAvatar.addEventListener('submit', handleAvatarSubmit);
+popupFormAvatar.addEventListener('submit', () => {
+  editPhoto
+  console.log('click')
+});
 popupFormEdit.addEventListener('submit', handleUserInfoFormSubmit);
 popupFormAdd.addEventListener('submit', handleCardInfoFormSubmit);
+
+const editPhoto = new PopupWithForm(document.querySelector('#popup-avatar', () => {
+  handleAvatarSubmit()
+}))
+// editPhoto
 
 export {
   meId,
