@@ -26,6 +26,8 @@ export class Card {
         this._likes = data.likes;
         this._cardId = data.cardId
     }
+    
+    
     // Получаем шаблон карточки
     _getTemplate() {
         this._card = document.querySelector('#card').cloneNode(true).content;
@@ -38,25 +40,37 @@ export class Card {
     }
 
     _deleteCard() {
-        api.deleteUserCard(this.itemCardId)
-            .then(() => {                
+        console.log(this._cardId)
+        api.deleteUserCard(this._cardId)
+            .then(() => {
+                console.log(this._cardId)
                 popupDeleteCard.close();
                 this.itemCard.remove();
+                this._element = null;
             })
             .catch(err => console.log(`Что-то пошло не так: ${err}`))
     }
+    
+    
+
     _setEventListeners() {
-        agreeDeleteCard.addEventListener('click', () => {this._deleteCard(this.itemCardId)}); 
+        // agreeDeleteCard.addEventListener('click', () => {
+        //     this._deleteCard(this._cardId)
+        // });
         // увеличение
-        this._cardImage.addEventListener('click', () => {
-            this._openFullImage()
+        this._cardImage.addEventListener('click', (evt) => {
+            this._openFullImage();
+            console.log(evt.target.closest('.card'))
+            console.log(this._cardId)
         });
         // удаление
         this._deleteBtn.addEventListener('click', (evt) => {
-            popupDeleteCard.open(); 
+            this._deleteCard(this._cardId)
+            // popupDeleteCard.open();
             this.itemCard = evt.target.closest('.card');
-            // this.itemCardId = cardId;
-
+            // this.itemCardId = this._cardId;
+            console.log(this.itemCard)
+            console.log(this.itemCardId)
         })
         // лайк
         this._likeBtn.addEventListener('click', () => {

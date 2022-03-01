@@ -64,7 +64,6 @@ let idCard;
 
 function renderCard (cardTemplate, containerCards) {
   containerCards.prepend(cardTemplate);
-  console.log(cardTemplate);
 }
 
 api.getAppInfo()
@@ -93,7 +92,6 @@ function renderAllCards(arrCard) {
       cardId: element._id
     }
     const newCard = new Card(data);
-    console.log(newCard)
     newCard.renderCard()
     // renderCard(newCard, cardsContainer);
   });
@@ -157,7 +155,6 @@ function handleCardInfoFormSubmit(evt) {
   api.addNewCard(imgNameField.value, imgLinkField.value)
     //addNewCard(imgNameField.value, imgLinkField.value)
     .then((card) => {
-      console.log(card);
       const data = {
         name: card.name,
         link: card.link,
@@ -166,7 +163,6 @@ function handleCardInfoFormSubmit(evt) {
         likes: card.likes,
         cardId: card._id
       }
-      console.log(data);
       const newCard = new Card(data);
       newCard.renderCard()
       disableButton(popupBtnCreate, validationConfig.inactiveButtonClass);
