@@ -1,4 +1,4 @@
-import { api } from "./api-oop";
+import { api } from "./api";
 import { popupImg, popupDeleteCard } from "./popup";
 import { popupWithImage } from "./popupWithImage";
 import { meId } from "./index";
@@ -86,4 +86,4 @@ function deleteCard(card) {
 
 agreeDeleteCard.addEventListener('click', () => {deleteCard(itemCard)}); 
 
-export { popupImg, containerCards, createCard, renderCard };
+export { popupImg, containerCards, createCard, renderCard }; 

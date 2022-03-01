@@ -1,7 +1,8 @@
 import '../index.css';
-import { api } from './api-oop';
+import { api } from './api';
 import { formValidator } from './validate';
 import { popupAvatar, popupProfileEdit, popupCardAdd, popupImg, popupDeleteCard } from './popup';
+import { userInfo } from './UserInfo';
 import { createCard, renderCard, containerCards } from './card';
 
 const cardsContainer = document.querySelector('.cards');
@@ -26,8 +27,6 @@ const popupUserName = profileEditPopup.querySelector('#user-name-field');
 const popupUserCareer = profileEditPopup.querySelector('#user-career-field');
 const userNameField = document.querySelector('#user-name-field');
 const userCareerField = document.querySelector('#user-career-field');
-const profileNameContent = document.querySelector('.profile__name');
-const profileCareerContent = document.querySelector('.profile__career');
 const imgNameField = document.querySelector('#img-name-field');
 const imgLinkField = document.querySelector('#img-link-field');
 const imgAvatarField = SectionPopupAvatar.querySelector('.popup__edit');
@@ -35,13 +34,14 @@ const popupBtnCreate = document.querySelector('#create-button');
 const popupBtnSave = document.querySelector('#save-button');
 const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
+
 let meId;
 let idCard;
 
+
 api.getAppInfo()
   .then(([user, cards]) => {
-    changeElementTextContent(profileName, user.name); 
-    changeElementTextContent(profileCareer, user.about);
+    userInfo.getUserInfo();
     changeAvatar(profileAvatarImg, user.avatar);
     meId = user._id; 
 
@@ -91,17 +91,10 @@ function handleAvatarSubmit (evt) {
 
 function handleUserInfoFormSubmit (evt) {
   evt.preventDefault();
-
-  api.sendInfo(userNameField.value, userCareerField.value)
-    .then((userInfo) => {
-      profileNameContent.textContent = userInfo.name;
-      profileCareerContent.textContent = userInfo.about;
-      popupProfileEdit.close();
-      //closePopup(profileEditPopup);
-    })
-    .catch(err => console.log(`Что-то пошло не так: ${err}`))
-    .finally(() => {popupBtnSave.textContent = 'Сохранить';});
-    popupBtnSave.textContent = 'Сохранение...';
+  popupBtnSave.textContent = 'Сохранение...';
+  userInfo.setUserInfo(userNameField.value, userCareerField.value);
+  popupBtnSave.textContent = 'Сохранить';
+  popupProfileEdit.close()
 }
 
 function handleCardInfoFormSubmit (evt) {
