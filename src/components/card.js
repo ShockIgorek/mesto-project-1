@@ -5,11 +5,10 @@ import {
 import {
     popupDeleteCard
 } from "./popup.js";
+
 import {
-    popupWithImage
-} from "./PopupWithImage";
-import {
-    meId
+    meId,
+    popupWithImage,
 } from "./index";
 const popupContainerImg = document.querySelector('.popup__container-img');
 const popupName = popupContainerImg.querySelector('.popup__name');

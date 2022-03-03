@@ -1,4 +1,3 @@
-
 class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;
@@ -12,18 +11,18 @@ class Popup {
     close() {
         this._popupSelector.classList.remove('popup_opened');
         this.setEventListeners();
-    }   
-    
+    }
+
     _handleEscClose(event) {
         if (event.code === 'Escape') {
             this.close();
-        } 
+        }
     }
 
     _clickClosePopupForm(event) {
         if (event.target.classList.contains('popup')) {
             this.close();
-          }
+        }
     }
 
     setEventListeners() {
@@ -38,6 +37,11 @@ const popupCardAdd = new Popup(document.querySelector('#popup-add'));
 const popupImg = new Popup(document.querySelector('#popup-img'));
 const popupDeleteCard = new Popup(document.querySelector('#popup-delete-card'));
 
-export { Popup, popupAvatar, popupProfileEdit, popupCardAdd, popupImg, popupDeleteCard }
-
-
+export {
+    Popup,
+    popupAvatar,
+    popupProfileEdit,
+    popupCardAdd,
+    popupImg,
+    popupDeleteCard
+}

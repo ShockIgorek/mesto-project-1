@@ -7,7 +7,7 @@ export class Section {
     renderItems(arrCard) {
         arrCard.reverse().forEach(element => {
             this._dataRenderer(element);
-          });
+        });
     }
 
     addItem(cardTemplate) {

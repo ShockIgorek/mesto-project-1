@@ -16,14 +16,17 @@ import {
   userInfo
 } from './UserInfo.js';
 import {
-  Card, 
+  Card,
   itemCard,
   itemCardId
-} from './card-oop.js';
+} from './card.js';
+import {
+  PopupWithImage
+} from './PopupWithImage.js';
 import {
   PopupWithForm
 } from './popupWithForm.js';
-import { 
+import {
   Section
 } from './section.js';
 const cardsContainer = document.querySelector('.cards');
@@ -57,10 +60,11 @@ const popupBtnCreate = document.querySelector('#create-button');
 const popupBtnSave = document.querySelector('#save-button');
 const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
+const popupWithImage = new PopupWithImage(document.querySelector('#popup-img'), document.querySelector('.popup__img'));
 const popupAvatarForm = new PopupWithForm(popupFormAvatar, SectionPopupAvatar, handleAvatarSubmit);
 const popupEditForm = new PopupWithForm(popupFormEdit, profileEditPopup, handleUserInfoFormSubmit);
-const popupAddForm = new PopupWithForm(popupFormAdd, sectionPopupAdd, handleCardInfoFormSubmit)
-const section = new Section(renderCard, cardsContainer)
+const popupAddForm = new PopupWithForm(popupFormAdd, sectionPopupAdd, handleCardInfoFormSubmit);
+const section = new Section(renderCard, cardsContainer);
 
 
 let meId;
@@ -82,7 +86,7 @@ formValidator.enableValidation();
 
 function createCards(arrCard) {
   return arrCard.map(element => {
-      const data = {
+    const data = {
       name: element.name,
       link: element.link,
       likesCount: element.likes.length,
@@ -117,7 +121,7 @@ function deleteCard(card) {
   api.deleteUserCard(itemCardId)
     .then(() => {
       popupDeleteCard.close();
-      card.remove(); 
+      card.remove();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
 }
@@ -162,7 +166,7 @@ function handleCardInfoFormSubmit(evt) {
       }
 
       const newCard = new Card(data);
-      newCard.renderCard() 
+      newCard.renderCard()
       formValidator.disableButton(popupBtnCreate);
       popupAddForm.close();
       popupFormAdd.reset();
@@ -202,7 +206,9 @@ closeDelCard.addEventListener('click', function () {
   popupDeleteCard.close()
 });
 
-agreeDeleteCard.addEventListener('click', () => {deleteCard(itemCard)}); 
+agreeDeleteCard.addEventListener('click', () => {
+  deleteCard(itemCard)
+});
 popupAvatarForm.setEventListeners();
 popupEditForm.setEventListeners();
 popupAddForm.setEventListeners();
@@ -214,5 +220,6 @@ export {
   popupBtnSave,
   popupAvatarBtnSave,
   changeElementTextContent,
-  changeAvatar
+  changeAvatar,
+  popupWithImage
 }

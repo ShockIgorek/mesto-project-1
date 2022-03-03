@@ -1,6 +1,6 @@
 import { Popup} from './popup';
 
-class PopupWithImage extends Popup {
+export class PopupWithImage extends Popup {
     constructor(popupSelector, imgSelector) {
         super(popupSelector); 
         this._imgSelector = imgSelector;
@@ -14,7 +14,3 @@ class PopupWithImage extends Popup {
     }
 }
 
-
-const popupWithImage = new PopupWithImage(document.querySelector('#popup-img'), document.querySelector('.popup__img'));
-
-export { popupWithImage };
