@@ -12,9 +12,9 @@ import {
     meId
 } from "./index";
 const popupContainerImg = document.querySelector('.popup__container-img');
-const popupDelCard = document.querySelector('#popup-delete-card');
 const popupName = popupContainerImg.querySelector('.popup__name');
-const agreeDeleteCard = popupDelCard.querySelector('#delete-button');
+export let itemCard;
+export let itemCardId;
 
 export class Card {
     constructor(data) {
@@ -37,39 +37,24 @@ export class Card {
     _openFullImage() {
         popupWithImage.open(popupName, this._link, this._name);
     }
-
-    _deleteCard() {
-        console.log(this._cardId)
-        api.deleteUserCard(this._cardId)
-            .then(() => {
-                console.log(this._cardId)
-                popupDeleteCard.close();
-                this.itemCard.remove();
-                this._element = null;
-            })
-            .catch(err => console.log(`Что-то пошло не так: ${err}`))
+    
+    _openDeletePopup() {
+        popupDeleteCard.open();
     }
-    
-    
+
 
     _setEventListeners() {
-        // agreeDeleteCard.addEventListener('click', () => {
-        //     this._deleteCard(this._cardId)
-        // });
         // увеличение
         this._cardImage.addEventListener('click', (evt) => {
             this._openFullImage();
-            console.log(evt.target.closest('.card'))
-            console.log(this._cardId)
         });
         // удаление
         this._deleteBtn.addEventListener('click', (evt) => {
-            this._deleteCard(this._cardId)
-            // popupDeleteCard.open();
+            this._openDeletePopup();
             this.itemCard = evt.target.closest('.card');
-            // this.itemCardId = this._cardId;
-            console.log(this.itemCard)
-            console.log(this.itemCardId)
+            itemCard = this.itemCard;
+            this.itemCardId = this._cardId;
+            itemCardId = this.itemCardId;
         })
         // лайк
         this._likeBtn.addEventListener('click', () => {
@@ -77,7 +62,6 @@ export class Card {
         })
 
     }
-
 
     createCard() {
         this._element = this._getTemplate();
@@ -117,7 +101,6 @@ export class Card {
     likedHeart() {
         if (this._likeBtn.classList.contains('card__heart_active')) {
             api.removeLikeCard(this._cardId)
-                //removeLikeCard(cardId)
                 .then((result) => {
                     this._likesNumber.textContent = result.likes.length;
                     this._likeBtn.classList.remove('card__heart_active');
@@ -125,7 +108,6 @@ export class Card {
                 .catch(err => console.log(`Что-то пошло не так: ${err}`));
         } else {
             api.addLikeCard(this._cardId)
-                //addLikeCard(cardId)
                 .then((result) => {
                     this._likesNumber.textContent = result.likes.length;
                     this._likeBtn.classList.add('card__heart_active');

@@ -9,24 +9,26 @@ import {
   popupImg,
   popupDeleteCard
 } from './popup.js';
-
-
 import {
-  formValidator,
-  disableButton
+  formValidator
 } from './validate.js';
-// import { /*popupImg,*/ createCard, renderCard, containerCards } from './card';
 import {
   userInfo
-} from './UserInfo';
+} from './UserInfo.js';
 import {
-  Card
-} from './card-oop';
+  Card, 
+  itemCard,
+  itemCardId
+} from './card-oop.js';
 import {
   PopupWithForm
 } from './popupWithForm.js';
+import { 
+  Section
+} from './section.js';
 const cardsContainer = document.querySelector('.cards');
 const profileEditPopup = document.querySelector('#popup-edit');
+const sectionPopupAdd = document.querySelector('#popup-add');
 const popupContainer = profileEditPopup.querySelector('.popup__container');
 const profileEdit = document.querySelector('.profile__edit');
 const profileAdd = document.querySelector('.profile__add');
@@ -39,6 +41,7 @@ const SectionPopupAvatar = document.querySelector('#popup-avatar');
 const closeAvatar = SectionPopupAvatar.querySelector('.popup__exit');
 const exitBtn = document.querySelector('#exit-button');
 const popupDelCard = document.querySelector('#popup-delete-card');
+const agreeDeleteCard = popupDelCard.querySelector('#delete-button');
 const closeDelCard = popupDelCard.querySelector('.popup__exit');
 const popupFormAvatar = SectionPopupAvatar.querySelector('.popup__form');
 const popupFormEdit = document.querySelector('#popup__form-id');
@@ -54,14 +57,14 @@ const popupBtnCreate = document.querySelector('#create-button');
 const popupBtnSave = document.querySelector('#save-button');
 const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
+const popupAvatarForm = new PopupWithForm(popupFormAvatar, SectionPopupAvatar, handleAvatarSubmit);
+const popupEditForm = new PopupWithForm(popupFormEdit, profileEditPopup, handleUserInfoFormSubmit);
+const popupAddForm = new PopupWithForm(popupFormAdd, sectionPopupAdd, handleCardInfoFormSubmit)
+const section = new Section(renderCard, cardsContainer)
+
 
 let meId;
 let idCard;
-
-console.log(document.querySelector('#popup-avatar'))
-const test = new PopupWithForm(document.querySelector('#popup-avatar'))
-console.log(test._getInputValues())
-
 
 api.getAppInfo()
   .then(([user, cards]) => {
@@ -69,16 +72,17 @@ api.getAppInfo()
     changeAvatar(profileAvatarImg, user.avatar);
     meId = user._id;
 
-    renderAllCards(cards);
+    const createdCards = createCards(cards);
+    section.renderItems(createdCards);
     idCard = cards._id;
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
 
 formValidator.enableValidation();
 
-function renderAllCards(arrCard) {
-  arrCard.reverse().forEach(element => {
-    const data = {
+function createCards(arrCard) {
+  return arrCard.map(element => {
+      const data = {
       name: element.name,
       link: element.link,
       likesCount: element.likes.length,
@@ -86,10 +90,12 @@ function renderAllCards(arrCard) {
       likes: element.likes,
       cardId: element._id
     }
-    const newCard = new Card(data);
-    newCard.renderCard()
-    // renderCard(newCard, cardsContainer);
+    return new Card(data);
   });
+}
+
+function renderCard(card) {
+  card.renderCard();
 }
 
 function changeElementTextContent(elementDOM, objValue) {
@@ -107,15 +113,24 @@ function fillEditForm() {
   popupUserCareer.setAttribute('value', profileCareer.textContent);
 }
 
-function handleAvatarSubmit() {
-  // evt.preventDefault();
+function deleteCard(card) {
+  api.deleteUserCard(itemCardId)
+    .then(() => {
+      popupDeleteCard.close();
+      card.remove(); 
+    })
+    .catch(err => console.log(`Что-то пошло не так: ${err}`))
+}
+
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
 
   const avatarLink = imgAvatarField.value;
 
   api.updateAvatarUser(avatarLink)
     .then(() => {
       changeAvatar(profileAvatarImg, avatarLink);
-      popupAvatar.close();
+      popupAvatarForm.close();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
     .finally(() => {
@@ -129,14 +144,13 @@ function handleUserInfoFormSubmit(evt) {
   popupBtnSave.textContent = 'Сохранение...';
   userInfo.setUserInfo(userNameField.value, userCareerField.value);
   popupBtnSave.textContent = 'Сохранить';
-  popupProfileEdit.close()
+  popupEditForm.close();
 }
 
 function handleCardInfoFormSubmit(evt) {
   evt.preventDefault();
 
   api.addNewCard(imgNameField.value, imgLinkField.value)
-    //addNewCard(imgNameField.value, imgLinkField.value)
     .then((card) => {
       const data = {
         name: card.name,
@@ -146,11 +160,11 @@ function handleCardInfoFormSubmit(evt) {
         likes: card.likes,
         cardId: card._id
       }
+
       const newCard = new Card(data);
-      newCard.renderCard()
+      newCard.renderCard() 
       formValidator.disableButton(popupBtnCreate);
-      popupCardAdd.close();
-      //closePopup(popupAdd);
+      popupAddForm.close();
       popupFormAdd.reset();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
@@ -188,18 +202,10 @@ closeDelCard.addEventListener('click', function () {
   popupDeleteCard.close()
 });
 
-
-popupFormAvatar.addEventListener('submit', () => {
-  editPhoto
-  console.log('click')
-});
-popupFormEdit.addEventListener('submit', handleUserInfoFormSubmit);
-popupFormAdd.addEventListener('submit', handleCardInfoFormSubmit);
-
-const editPhoto = new PopupWithForm(document.querySelector('#popup-avatar', () => {
-  handleAvatarSubmit()
-}))
-// editPhoto
+agreeDeleteCard.addEventListener('click', () => {deleteCard(itemCard)}); 
+popupAvatarForm.setEventListeners();
+popupEditForm.setEventListeners();
+popupAddForm.setEventListeners();
 
 export {
   meId,

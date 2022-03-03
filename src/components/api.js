@@ -6,7 +6,6 @@ class Api {
   
     getInitialCards() {
           return fetch().then()
-      // ...
     }
 //проверка статуса запроса  
     _checkResponse(res) {
