@@ -147,8 +147,12 @@ function handleUserInfoFormSubmit(evt) {
   evt.preventDefault();
   popupBtnSave.textContent = 'Сохранение...';
   userInfo.setUserInfo(userNameField.value, userCareerField.value);
+  const nameValue = userNameField.value;
+  const careerValue = userCareerField.value;
   popupBtnSave.textContent = 'Сохранить';
   popupEditForm.close();
+  userNameField.value = nameValue;
+  userCareerField.value = careerValue;
 }
 
 function handleCardInfoFormSubmit(evt) {
