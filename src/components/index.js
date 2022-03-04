@@ -1,17 +1,17 @@
 import '../index.css';
 import {
   api
-} from './api.js';
+} from './Api.js';
 import {
   popupAvatar,
   popupProfileEdit,
   popupCardAdd,
   popupImg,
   popupDeleteCard
-} from './popup.js';
+} from './Popup.js';
 import {
   formValidator
-} from './validate.js';
+} from './FormValidator.js';
 import {
   userInfo
 } from './UserInfo.js';
@@ -19,16 +19,16 @@ import {
   Card,
   itemCard,
   itemCardId
-} from './card.js';
+} from './Сard.js';
 import {
   PopupWithImage
 } from './PopupWithImage.js';
 import {
   PopupWithForm
-} from './popupWithForm.js';
+} from './PopupWithForm.js';
 import {
   Section
-} from './section.js';
+} from './Section.js';
 const cardsContainer = document.querySelector('.cards');
 const profileEditPopup = document.querySelector('#popup-edit');
 const sectionPopupAdd = document.querySelector('#popup-add');
