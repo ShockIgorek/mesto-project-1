@@ -4,7 +4,7 @@ import {
 
 import {
     popupDeleteCard
-} from "./Popup.js";
+} from "./index.js";
 
 import {
     meId,
