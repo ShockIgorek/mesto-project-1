@@ -9,8 +9,4 @@ export class Section {
             this._dataRenderer(element);
         });
     }
-
-    addItem(cardTemplate) {
-        this._containerSelector.prepend(cardTemplate)
-    }
 }

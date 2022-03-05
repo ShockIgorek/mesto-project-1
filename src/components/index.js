@@ -75,7 +75,6 @@ api.getAppInfo()
     userInfo.getUserInfo();
     changeAvatar(profileAvatarImg, user.avatar);
     meId = user._id;
-
     const createdCards = createCards(cards);
     section.renderItems(createdCards);
     idCard = cards._id;
@@ -99,7 +98,7 @@ function createCards(arrCard) {
 }
 
 function renderCard(card) {
-  card.renderCard();
+  cardsContainer.prepend(card.createCard());
 }
 
 function changeElementTextContent(elementDOM, objValue) {
@@ -170,7 +169,7 @@ function handleCardInfoFormSubmit(evt) {
       }
 
       const newCard = new Card(data);
-      newCard.renderCard()
+      document.querySelector('.cards').prepend(newCard.createCard())
       formValidator.disableButton(popupBtnCreate);
       popupAddForm.close();
       popupFormAdd.reset();

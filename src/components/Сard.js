@@ -121,8 +121,4 @@ export class Card {
             this._deleteBtn.remove();
         }
     }
-
-    renderCard() {
-        document.querySelector('.cards').prepend(this.createCard());
-    }
 }
