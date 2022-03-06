@@ -1,15 +1,3 @@
-import {
-    api
-} from "./Api.js";
-
-/*import {
-    popupDeleteCard
-} from "./Popup.js";*/
-
-import {
-    meId
-} from "./index";
-import { PopupWithImage } from "./PopupWithImage.js";
 const popupContainerImg = document.querySelector('.popup__container-img');
 const popupName = popupContainerImg.querySelector('.popup__name');
 export let itemCard;
