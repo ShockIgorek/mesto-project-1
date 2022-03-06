@@ -56,6 +56,7 @@ const popupBtnCreate = document.querySelector('#create-button');
 const popupBtnSave = document.querySelector('#save-button');
 const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
+const popupAvatar = new Popup(document.querySelector('#popup-avatar'));
 const popupProfileEdit = new Popup(document.querySelector('#popup-edit'));
 const popupCardAdd = new Popup(document.querySelector('#popup-add'));
 const popupImg = new Popup(document.querySelector('#popup-img'));
@@ -183,7 +184,7 @@ function handleCardInfoFormSubmit(evt) {
 
 
 profileAvatar.addEventListener('click', function () {
-  popupAvatarForm.open()
+  popupAvatar.open()
 });
 profileEdit.addEventListener('click', function () {
   popupProfileEdit.open()
@@ -193,12 +194,28 @@ profileAdd.addEventListener('click', function () {
   popupCardAdd.open()
 });
 
-
+closeAvatar.addEventListener('click', function () {
+  popupAvatar.close()
+});
+popupExit.addEventListener('click', function () {
+  popupProfileEdit.close()
+});
+exitBtn.addEventListener('click', function () {
+  popupCardAdd.close()
+});
+popupExitImg.addEventListener('click', function () {
+  popupImg.close()
+});
+closeDelCard.addEventListener('click', function () {
+  popupDeleteCard.close()
+});
 
 agreeDeleteCard.addEventListener('click', () => {
   deleteCard(itemCard)
 });
-
+popupAvatarForm.setEventListeners();
+popupEditForm.setEventListeners();
+popupAddForm.setEventListeners();
 
 export {
   meId,
