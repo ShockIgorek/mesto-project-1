@@ -5,14 +5,16 @@ export class Popup {
 
     open() {
         this._popupSelector.classList.add('popup_opened');
+        this.setEventListeners();
     }
 
     close() {
         this._popupSelector.classList.remove('popup_opened');
+        this._removeEventListeners()
     }
 
     _handleEscClose(event) {
-        if (event.code === 'Escape') {
+        if (event.key === 'Escape') {
             console.log('esc')
             this.close();
         }
@@ -24,13 +26,17 @@ export class Popup {
             this.close();
         }
     }
-
+    _removeEventListeners () {
+        this._popupSelector.removeEventListener('keyup', this._handleEscClose.bind(this));
+        this._popupSelector.removeEventListener('mousedown', this._clickClosePopupForm.bind(this));
+        this._popupSelector.querySelector('.popup__exit').removeEventListener('click', () => {this.close();console.log('click')})
+    }
     setEventListeners() {
-//разобраться с esc
         this._popupSelector.addEventListener('keyup', this._handleEscClose.bind(this));
         this._popupSelector.addEventListener('mousedown', this._clickClosePopupForm.bind(this));
         this._popupSelector.querySelector('.popup__exit').addEventListener('click', () => {this.close();console.log('click')})
     }
+    
 }
 
 

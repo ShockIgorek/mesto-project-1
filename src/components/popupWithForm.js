@@ -13,10 +13,6 @@ export class PopupWithForm extends Popup {
         return this._popupSection.querySelectorAll('.popup__edit')
     }
     
-    setEventListeners(evt) {
-        super.setEventListeners();
-        this._popupSection.addEventListener('submit', this._callbackSubmitForm);
-    }
 
     close() {
         super.close();
@@ -24,5 +20,8 @@ export class PopupWithForm extends Popup {
         this._getInputValues().forEach(element => {
             element.value = '';
         });
+    }
+    open() {
+        super.open();
     }
 }
