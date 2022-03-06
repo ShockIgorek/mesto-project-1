@@ -3,7 +3,11 @@ import {
   api
 } from './Api.js';
 import {
-  Popup
+  popupAvatar,
+  popupProfileEdit,
+  popupCardAdd,
+  popupImg,
+  popupDeleteCard
 } from './Popup.js';
 import {
   formValidator
@@ -56,11 +60,6 @@ const popupBtnCreate = document.querySelector('#create-button');
 const popupBtnSave = document.querySelector('#save-button');
 const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
-const popupAvatar = new Popup(document.querySelector('#popup-avatar'));
-const popupProfileEdit = new Popup(document.querySelector('#popup-edit'));
-const popupCardAdd = new Popup(document.querySelector('#popup-add'));
-const popupImg = new Popup(document.querySelector('#popup-img'));
-const popupDeleteCard = new Popup(document.querySelector('#popup-delete-card'));
 const popupWithImage = new PopupWithImage(document.querySelector('#popup-img'), document.querySelector('.popup__img'));
 const popupAvatarForm = new PopupWithForm(popupFormAvatar, SectionPopupAvatar, handleAvatarSubmit);
 const popupEditForm = new PopupWithForm(popupFormEdit, profileEditPopup, handleUserInfoFormSubmit);
@@ -225,6 +224,5 @@ export {
   popupAvatarBtnSave,
   changeElementTextContent,
   changeAvatar,
-  popupWithImage,
-  popupDeleteCard
+  popupWithImage
 }
