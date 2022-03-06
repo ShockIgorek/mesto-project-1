@@ -60,6 +60,9 @@ const popupBtnCreate = document.querySelector('#create-button');
 const popupBtnSave = document.querySelector('#save-button');
 const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
+const popupContainerImg = document.querySelector('.popup__container-img');
+const popupName = popupContainerImg.querySelector('.popup__name');
+const cardTemplate = document.querySelector('#card');
 const popupWithImage = new PopupWithImage(document.querySelector('#popup-img'), document.querySelector('.popup__img'));
 const popupAvatarForm = new PopupWithForm(popupFormAvatar, SectionPopupAvatar, handleAvatarSubmit);
 const popupEditForm = new PopupWithForm(popupFormEdit, profileEditPopup, handleUserInfoFormSubmit);
@@ -94,7 +97,7 @@ function createCards(arrCard) {
       likes: element.likes,
       cardId: element._id
     }
-    return new Card(data);
+    return new Card(data, cardTemplate, popupWithImage, popupDeleteCard, api, meId);
   });
 }
 
@@ -169,7 +172,7 @@ function handleCardInfoFormSubmit(evt) {
         cardId: card._id
       }
 
-      const newCard = new Card(data);
+      const newCard = new Card(data, cardTemplate, popupWithImage, popupDeleteCard, api, meId);
       newCard.renderCard()
       formValidator.disableButton(popupBtnCreate);
       popupAddForm.close();
