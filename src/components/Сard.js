@@ -123,5 +123,5 @@ export class Card {
 
     renderCard() {
         document.querySelector('.cards').prepend(this.createCard());
-    }
+    } 
 }

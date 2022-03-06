@@ -173,7 +173,8 @@ function handleCardInfoFormSubmit(evt) {
       }
 
       const newCard = new Card(data, cardTemplate, popupWithImage, popupDeleteCard, api, meId);
-      newCard.renderCard()
+      //newCard.renderCard()
+      section.addItem(newCard.createCard());
       formValidator.disableButton(popupBtnCreate);
       popupAddForm.close();
       popupFormAdd.reset();
