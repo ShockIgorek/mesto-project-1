@@ -10,7 +10,7 @@ import {
   popupDeleteCard
 } from './Popup.js';
 import {
-  formValidator
+  FormValidator
 } from './FormValidator.js';
 import {
   userInfo
@@ -29,6 +29,13 @@ import {
 import {
   Section
 } from './Section.js';
+const config = {
+  inputSelector: '.popup__edit',
+  submitButtonSelector: '.popup__save-btn',
+  inactiveButtonClass: 'popup__save-btn_disabled',
+  inputErrorClass: 'popup__error_visible',
+  errorClass: 'popup__edit_visible',
+}
 const cardsContainer = document.querySelector('.cards');
 const profileEditPopup = document.querySelector('#popup-edit');
 const sectionPopupAdd = document.querySelector('#popup-add');
@@ -68,8 +75,14 @@ const popupAvatarForm = new PopupWithForm(popupFormAvatar, SectionPopupAvatar, h
 const popupEditForm = new PopupWithForm(popupFormEdit, profileEditPopup, handleUserInfoFormSubmit);
 const popupAddForm = new PopupWithForm(popupFormAdd, sectionPopupAdd, handleCardInfoFormSubmit);
 const section = new Section(renderCard, cardsContainer);
+const formValidatorAvatar = new FormValidator(popupFormAvatar, config)
+const formValidatorEdit = new FormValidator(popupFormEdit, config)
+const formValidatorAdd = new FormValidator(popupFormAdd, config)
 
 
+formValidatorAvatar.enableValidation();
+formValidatorEdit.enableValidation();
+formValidatorAdd.enableValidation();
 let meId;
 let idCard;
 
@@ -85,7 +98,7 @@ api.getAppInfo()
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
 
-formValidator.enableValidation();
+
 
 function createCards(arrCard) {
   return arrCard.map(element => {
@@ -175,7 +188,7 @@ function handleCardInfoFormSubmit(evt) {
       const newCard = new Card(data, cardTemplate, popupWithImage, popupDeleteCard, api, meId);
       //newCard.renderCard()
       section.addItem(newCard.createCard());
-      formValidator.disableButton(popupBtnCreate);
+      formValidatorAdd.disableButton(popupBtnCreate);
       popupAddForm.close();
       popupFormAdd.reset();
     })
