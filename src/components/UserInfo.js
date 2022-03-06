@@ -1,4 +1,4 @@
-import { api } from './Api.js';
+import { api } from './api.js';
 
 class UserInfo{
     constructor(selectorsInfoData) {

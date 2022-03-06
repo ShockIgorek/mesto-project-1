@@ -1,10 +1,10 @@
 import {
     api
-} from "./Api.js";
+} from "./api.js";
 
 import {
     popupDeleteCard
-} from "./Popup.js";
+} from "./popup.js";
 
 import {
     meId,
