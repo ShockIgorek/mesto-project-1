@@ -9,7 +9,8 @@ class Popup {
 
     close() {
         this._popupSelector.classList.remove('popup_opened');
-        this.setEventListeners();
+        document.removeEventListener('keyup', this._handleEscClose.bind(this));
+        document.removeEventListener('mousedown', this._clickClosePopupForm.bind(this));
     }
 
     _handleEscClose(event) {
