@@ -9,14 +9,7 @@ class Popup {
 
     close() {
         this._popupSelector.classList.remove('popup_opened');
-        document.removeEventListener('keyup', this._handleEscClose.bind(this));
-        document.removeEventListener('mousedown', this._clickClosePopupForm.bind(this));
-    }
-
-    _handleEscClose(event) {
-        if (event.code === 'Escape') {
-            this.close();
-        }
+        this._popupSelector.removeEventListener('mousedown', this._clickClosePopupForm.bind(this));
     }
 
     _clickClosePopupForm(event) {
@@ -26,8 +19,7 @@ class Popup {
     }
 
     setEventListeners() {
-        document.addEventListener('keyup', this._handleEscClose.bind(this));
-        document.addEventListener('mousedown', this._clickClosePopupForm.bind(this));
+        this._popupSelector.addEventListener('mousedown', this._clickClosePopupForm.bind(this));
     }
 }
 
@@ -35,7 +27,7 @@ const popupAvatar = new Popup(document.querySelector('#popup-avatar'));
 const popupProfileEdit = new Popup(document.querySelector('#popup-edit'));
 const popupCardAdd = new Popup(document.querySelector('#popup-add'));
 const popupImg = new Popup(document.querySelector('#popup-img'));
-const popupDeleteCard = new Popup(document.querySelector('#popup-delete-card'));
+const popupDeleteCard = new Popup(document.querySelector('#popup-delete-card')); 
 
 export {
     Popup,
@@ -44,4 +36,4 @@ export {
     popupCardAdd,
     popupImg,
     popupDeleteCard
-}
+} 

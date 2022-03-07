@@ -8,7 +8,7 @@ import {
   popupCardAdd,
   popupImg,
   popupDeleteCard
-} from './Popup.js';
+} from './Popup.js'; 
 import {
   FormValidator
 } from './FormValidator.js';
@@ -133,6 +133,15 @@ function fillEditForm() {
   popupUserCareer.setAttribute('value', profileCareer.textContent);
 }
 
+function handleEscClose(event) {
+  if (event.code === 'Escape') {
+      const popup = document.querySelector('.popup_opened');
+      if (popup !== null) {
+        popup.classList.remove('popup_opened');
+      }
+  } 
+}
+
 function deleteCard(card) {
   api.deleteUserCard(itemCardId)
     .then(() => {
@@ -200,6 +209,8 @@ function handleCardInfoFormSubmit(evt) {
 }
 
 
+document.addEventListener('keyup', (event) => {handleEscClose(event)});
+
 profileAvatar.addEventListener('click', function () {
   popupAvatar.open()
 });
@@ -225,7 +236,7 @@ popupExitImg.addEventListener('click', function () {
 });
 closeDelCard.addEventListener('click', function () {
   popupDeleteCard.close()
-});
+}); 
 
 agreeDeleteCard.addEventListener('click', () => {
   deleteCard(itemCard)
