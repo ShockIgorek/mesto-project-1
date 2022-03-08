@@ -13,7 +13,7 @@ import {
   FormValidator
 } from './FormValidator.js';
 import {
-  userInfo
+  UserInfo
 } from './UserInfo.js';
 import {
   Card,
@@ -79,6 +79,10 @@ const section = new Section(renderCard, cardsContainer);
 const formValidatorAvatar = new FormValidator(popupFormAvatar, config)
 const formValidatorEdit = new FormValidator(popupFormEdit, config)
 const formValidatorAdd = new FormValidator(popupFormAdd, config)
+const userInfo = new UserInfo({ 
+  userName: profileName,
+  userAbout: profileCareer
+})
 
 
 formValidatorAvatar.enableValidation();
@@ -215,7 +219,6 @@ function handleCardInfoFormSubmit(evt) {
   popupBtnCreate.textContent = 'Создание...';
 }
 
-
 document.addEventListener('keyup', (event) => {handleEscClose(event)});
 document.addEventListener('mousedown', (event) => {clickClosePopupForm(event)});
 
@@ -229,22 +232,6 @@ profileEdit.addEventListener('click', fillEditForm);
 profileAdd.addEventListener('click', function () {
   popupCardAdd.open()
 });
-
-/*closeAvatar.addEventListener('click', function () {
-  popupAvatar.close()
-});
-popupExit.addEventListener('click', function () {
-  popupProfileEdit.close()
-});
-exitBtn.addEventListener('click', function () {
-  popupCardAdd.close()
-});
-popupExitImg.addEventListener('click', function () {
-  popupImg.close()
-});
-closeDelCard.addEventListener('click', function () {
-  popupDeleteCard.close()
-}); */
 
 agreeDeleteCard.addEventListener('click', () => {
   deleteCard(itemCard)

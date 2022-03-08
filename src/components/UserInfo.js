@@ -1,6 +1,6 @@
 import { api } from './Api.js';
 
-class UserInfo{
+export class UserInfo{
     constructor(selectorsInfoData) {
         this._name = selectorsInfoData.userName;
         this._about = selectorsInfoData.userAbout;
@@ -21,8 +21,4 @@ class UserInfo{
     }
 }
 
-export const userInfo = new UserInfo({ 
-    userName: document.querySelector('.profile__name'),
-    userAbout: document.querySelector('.profile__career')
-})
 
