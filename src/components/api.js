@@ -4,9 +4,6 @@ class Api {
         this._headers = options.headers;
     }
 
-    getInitialCards() {
-        return fetch().then()
-    }
     //проверка статуса запроса  
     _checkResponse(res) {
         if (res.ok) {
