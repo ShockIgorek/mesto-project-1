@@ -58,7 +58,6 @@ export class Card {
         this._likeBtn.addEventListener('click', () => {
             this.likedHeart()
         })
-
     }
 
     createCard() {

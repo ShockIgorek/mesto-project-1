@@ -74,6 +74,7 @@ const popupWithImage = new PopupWithImage(document.querySelector('#popup-img'), 
 const popupAvatarForm = new PopupWithForm(popupFormAvatar, SectionPopupAvatar, handleAvatarSubmit);
 const popupEditForm = new PopupWithForm(popupFormEdit, profileEditPopup, handleUserInfoFormSubmit);
 const popupAddForm = new PopupWithForm(popupFormAdd, sectionPopupAdd, handleCardInfoFormSubmit);
+const popupDelOneCard = new PopupWithForm(popupDelCard, popupDelCard);
 const section = new Section(renderCard, cardsContainer);
 const formValidatorAvatar = new FormValidator(popupFormAvatar, config)
 const formValidatorEdit = new FormValidator(popupFormEdit, config)
@@ -142,6 +143,13 @@ function handleEscClose(event) {
   } 
 }
 
+function clickClosePopupForm(event) {
+  const popup = document.querySelector('.popup_opened');
+  if (event.target.classList.contains('popup')) {
+    popup.classList.remove('popup_opened');
+  }
+}
+
 function deleteCard(card) {
   api.deleteUserCard(itemCardId)
     .then(() => {
@@ -155,7 +163,6 @@ function handleAvatarSubmit(evt) {
   evt.preventDefault();
 
   const avatarLink = imgAvatarField.value;
-
   api.updateAvatarUser(avatarLink)
     .then(() => {
       changeAvatar(profileAvatarImg, avatarLink);
@@ -210,6 +217,7 @@ function handleCardInfoFormSubmit(evt) {
 
 
 document.addEventListener('keyup', (event) => {handleEscClose(event)});
+document.addEventListener('mousedown', (event) => {clickClosePopupForm(event)});
 
 profileAvatar.addEventListener('click', function () {
   popupAvatar.open()
@@ -222,7 +230,7 @@ profileAdd.addEventListener('click', function () {
   popupCardAdd.open()
 });
 
-closeAvatar.addEventListener('click', function () {
+/*closeAvatar.addEventListener('click', function () {
   popupAvatar.close()
 });
 popupExit.addEventListener('click', function () {
@@ -236,7 +244,7 @@ popupExitImg.addEventListener('click', function () {
 });
 closeDelCard.addEventListener('click', function () {
   popupDeleteCard.close()
-}); 
+}); */
 
 agreeDeleteCard.addEventListener('click', () => {
   deleteCard(itemCard)
@@ -244,6 +252,8 @@ agreeDeleteCard.addEventListener('click', () => {
 popupAvatarForm.setEventListeners();
 popupEditForm.setEventListeners();
 popupAddForm.setEventListeners();
+popupWithImage.setEventListeners();
+popupDelOneCard.setEventListeners();
 
 export {
   meId,

@@ -9,17 +9,15 @@ class Popup {
 
     close() {
         this._popupSelector.classList.remove('popup_opened');
-        this._popupSelector.removeEventListener('mousedown', this._clickClosePopupForm.bind(this));
+        this._popupSelector.removeEventListener('click', this._clickCloseBtn.bind(this));
     }
 
-    _clickClosePopupForm(event) {
-        if (event.target.classList.contains('popup')) {
-            this.close();
-        }
+    _clickCloseBtn() {
+        this.close();
     }
 
     setEventListeners() {
-        this._popupSelector.addEventListener('mousedown', this._clickClosePopupForm.bind(this));
+        this._popupSelector.querySelector('.popup__exit').addEventListener('click', () => {this._clickCloseBtn()});
     }
 }
 
