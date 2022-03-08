@@ -1,4 +1,4 @@
-class Popup {
+export class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;
     }
@@ -20,18 +20,3 @@ class Popup {
         this._popupSelector.querySelector('.popup__exit').addEventListener('click', () => {this._clickCloseBtn()});
     }
 }
-
-const popupAvatar = new Popup(document.querySelector('#popup-avatar'));
-const popupProfileEdit = new Popup(document.querySelector('#popup-edit'));
-const popupCardAdd = new Popup(document.querySelector('#popup-add'));
-const popupImg = new Popup(document.querySelector('#popup-img'));
-const popupDeleteCard = new Popup(document.querySelector('#popup-delete-card')); 
-
-export {
-    Popup,
-    popupAvatar,
-    popupProfileEdit,
-    popupCardAdd,
-    popupImg,
-    popupDeleteCard
-} 

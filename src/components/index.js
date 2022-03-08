@@ -3,13 +3,6 @@ import {
   api
 } from './Api.js';
 import {
-  popupAvatar,
-  popupProfileEdit,
-  popupCardAdd,
-  popupImg,
-  popupDeleteCard
-} from './Popup.js'; 
-import {
   FormValidator
 } from './FormValidator.js';
 import {
@@ -115,7 +108,7 @@ function createCards(arrCard) {
       likes: element.likes,
       cardId: element._id
     }
-    return new Card(data, cardTemplate, popupWithImage, popupDeleteCard, api, meId);
+    return new Card(data, cardTemplate, popupWithImage, popupDelOneCard, api, meId);
   });
 }
 
@@ -157,7 +150,7 @@ function clickClosePopupForm(event) {
 function deleteCard(card) {
   api.deleteUserCard(itemCardId)
     .then(() => {
-      popupDeleteCard.close();
+      popupDelOneCard.close();
       card.remove();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
@@ -205,7 +198,7 @@ function handleCardInfoFormSubmit(evt) {
         cardId: card._id
       }
 
-      const newCard = new Card(data, cardTemplate, popupWithImage, popupDeleteCard, api, meId);
+      const newCard = new Card(data, cardTemplate, popupWithImage, popupDelOneCard, api, meId);
       //newCard.renderCard()
       section.addItem(newCard.createCard());
       formValidatorAdd.disableButton(popupBtnCreate);
@@ -223,14 +216,14 @@ document.addEventListener('keyup', (event) => {handleEscClose(event)});
 document.addEventListener('mousedown', (event) => {clickClosePopupForm(event)});
 
 profileAvatar.addEventListener('click', function () {
-  popupAvatar.open()
+  popupAvatarForm.open();
 });
 profileEdit.addEventListener('click', function () {
-  popupProfileEdit.open()
+  popupEditForm.open();
 });
 profileEdit.addEventListener('click', fillEditForm);
 profileAdd.addEventListener('click', function () {
-  popupCardAdd.open()
+  popupAddForm.open();
 });
 
 agreeDeleteCard.addEventListener('click', () => {
