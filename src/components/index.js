@@ -239,3 +239,4 @@ export {
   changeAvatar,
   popupWithImage
 }
+// фиксим баги
