@@ -203,7 +203,6 @@ function handleCardInfoFormSubmit(evt) {
       section.addItem(newCard.createCard());
       formValidatorAdd.disableButton(popupBtnCreate);
       popupAddForm.close();
-      popupFormAdd.reset();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
     .finally(() => {
