@@ -1,6 +1,6 @@
-import { api } from './api.js';
+import { api } from './Api.js';
 
-class UserInfo{
+export class UserInfo{
     constructor(selectorsInfoData) {
         this._name = selectorsInfoData.userName;
         this._about = selectorsInfoData.userAbout;
@@ -14,15 +14,11 @@ class UserInfo{
             })    
             .catch(err => console.log(`Что-то пошло не так: ${err}`))    
     }
-
+    
     setUserInfo(name, about) {
         api.sendInfo(name, about);
         this.getUserInfo();
     }
 }
 
-export const userInfo = new UserInfo({ 
-    userName: document.querySelector('.profile__name'),
-    userAbout: document.querySelector('.profile__career')
-})
 
