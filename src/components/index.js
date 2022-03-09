@@ -159,10 +159,10 @@ function deleteCard(card) {
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
 
-  const avatarLink = imgAvatarField.value;
-  api.updateAvatarUser(avatarLink)
+  //const avatarLink = imgAvatarField.value;
+  api.updateAvatarUser(/*avatarLink*/popupAvatarForm.getInputValues())
     .then(() => {
-      changeAvatar(profileAvatarImg, avatarLink);
+      changeAvatar(profileAvatarImg, /*avatarLink*/popupAvatarForm.getInputValues());
       popupAvatarForm.close();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
@@ -175,9 +175,9 @@ function handleAvatarSubmit(evt) {
 function handleUserInfoFormSubmit(evt) {
   evt.preventDefault();
   popupBtnSave.textContent = 'Сохранение...';
-  userInfo.setUserInfo(userNameField.value, userCareerField.value);
-  const nameValue = userNameField.value;
-  const careerValue = userCareerField.value;
+  userInfo.setUserInfo(/*userNameField.value, userCareerField.value*/popupEditForm.getInputValues()[0], popupEditForm.getInputValues()[1]);
+  const nameValue = /*userNameField.value*/popupEditForm.getInputValues()[0];
+  const careerValue = /*userCareerField.value*/popupEditForm.getInputValues()[1];
   popupBtnSave.textContent = 'Сохранить';
   popupEditForm.close();
   userNameField.value = nameValue;
@@ -187,7 +187,7 @@ function handleUserInfoFormSubmit(evt) {
 function handleCardInfoFormSubmit(evt) {
   evt.preventDefault();
 
-  api.addNewCard(imgNameField.value, imgLinkField.value)
+  api.addNewCard(/*imgNameField.value, imgLinkField.value*/popupAddForm.getInputValues()[0], popupAddForm.getInputValues()[1])
     .then((card) => {
       const data = {
         name: card.name,

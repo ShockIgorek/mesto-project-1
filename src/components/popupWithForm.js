@@ -9,8 +9,11 @@ export class PopupWithForm extends Popup {
         this._popupSection = popupSection;
     }
 
-    _getInputValues() {
-        return this._popupSection.querySelectorAll('.popup__edit')
+    getInputValues() {
+        //return this._popupSection.querySelectorAll('.popup__edit')
+        return Array.from(this._popupSection.querySelectorAll('.popup__edit')).map(item => {
+            return item.value;
+        })
     }
     
     setEventListeners(evt) {
@@ -20,8 +23,13 @@ export class PopupWithForm extends Popup {
 
     close() {
         super.close();
+        Array.from(document.querySelectorAll('.popup__form')).forEach(form => {
+            form.reset();
+        })
+        
+        /*super.close();
         this._getInputValues().forEach(element => {
             element.value = '';
-        });
+        });*/
     }
 }
