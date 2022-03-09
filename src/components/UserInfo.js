@@ -14,7 +14,7 @@ export class UserInfo{
             })    
             .catch(err => console.log(`Что-то пошло не так: ${err}`))    
     }
-
+    
     setUserInfo(name, about) {
         api.sendInfo(name, about);
         this.getUserInfo();
