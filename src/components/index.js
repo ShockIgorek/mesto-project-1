@@ -100,7 +100,7 @@ function createCards(arrCard) {
 }
 
 function renderCard(card) {
-  card.renderCard();
+  section.addItem(card.createCard());
 }
 
 function changeElementTextContent(elementDOM, objValue) {
