@@ -8,8 +8,8 @@ export class PopupWithImage extends Popup {
 
     open(name, imgLink, imgName) {
         super.open();
-        this._imgSelector.setAttribute('src', imgLink);
-        this._imgSelector.setAttribute('alt', imgName);
+        document.querySelector(this._imgSelector).setAttribute('src', imgLink);
+        document.querySelector(this._imgSelector).setAttribute('alt', imgName);
         name.textContent = imgName;
     }
 }

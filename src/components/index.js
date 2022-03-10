@@ -53,11 +53,11 @@ const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
 const cardTemplate = document.querySelector('#card');
 const popupNameItem = document.querySelector('.popup__name');
-const popupWithImage = new PopupWithImage(document.querySelector('#popup-img'), document.querySelector('.popup__img'));
-const popupAvatarForm = new PopupWithForm(popupFormAvatar, SectionPopupAvatar, handleAvatarSubmit);
-const popupEditForm = new PopupWithForm(popupFormEdit, profileEditPopup, handleUserInfoFormSubmit);
-const popupAddForm = new PopupWithForm(popupFormAdd, sectionPopupAdd, handleCardInfoFormSubmit);
-const popupDelOneCard = new PopupWithForm(popupDelCard, popupDelCard);
+const popupWithImage = new PopupWithImage('#popup-img', '.popup__img');
+const popupAvatarForm = new PopupWithForm(popupFormAvatar, '#popup-avatar', handleAvatarSubmit);
+const popupEditForm = new PopupWithForm(popupFormEdit, '#popup-edit', handleUserInfoFormSubmit);
+const popupAddForm = new PopupWithForm(popupFormAdd, '#popup-add', handleCardInfoFormSubmit);
+const popupDelOneCard = new PopupWithForm(popupDelCard, '#popup-delete-card');
 const section = new Section(renderCard, cardsContainer);
 const formValidatorAvatar = new FormValidator(popupFormAvatar, config)
 const formValidatorEdit = new FormValidator(popupFormEdit, config)
@@ -167,16 +167,9 @@ function handleAvatarSubmit(evt, inputValues) {
 
 function handleUserInfoFormSubmit(evt, inputValues) {
   evt.preventDefault();
+
+  userInfo.setUserInfo(inputValues[0], inputValues[1], popupEditForm.close())
   popupBtnSave.textContent = 'Сохранение...';
-  userInfo.setUserInfo(inputValues[0], inputValues[1])
-  popupEditForm.close();
-  const nameValue = inputValues[0];
-  const careerValue = inputValues[1];
-  userNameField.value = nameValue;
-  userCareerField.value = careerValue;
-    
-  popupBtnSave.textContent = 'Сохранить';
-  popupBtnSave.textContent = 'Сохранить';
 }
 
 function handleCardInfoFormSubmit(evt, inputValues) {
