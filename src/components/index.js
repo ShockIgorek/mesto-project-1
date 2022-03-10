@@ -66,7 +66,6 @@ const userInfo = new UserInfo({
   userAbout: profileCareer
 })
 
-
 formValidatorAvatar.enableValidation();
 formValidatorEdit.enableValidation();
 formValidatorAdd.enableValidation();
@@ -84,8 +83,6 @@ api.getAppInfo()
     idCard = cards._id;
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
-
-
 
 function createCards(arrCard) {
   return arrCard.map(element => {
