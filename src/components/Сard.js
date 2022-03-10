@@ -1,10 +1,8 @@
-const popupContainerImg = document.querySelector('.popup__container-img');
-const popupName = popupContainerImg.querySelector('.popup__name');
 export let itemCard;
 export let itemCardId;
 
 export class Card {
-    constructor(data, selectorTemplateElement, PopupWithImage, popupDeleteCard, Api, meId) {
+    constructor(data, selectorTemplateElement, PopupWithImage, popupDeleteCard, Api, meId, popupName) {
         this._name = data.name;
         this._link = data.link;
         this._likesCount = data.likesCount;
@@ -19,21 +17,18 @@ export class Card {
         this._api = Api;
 
         this._meId = meId;
-        //this._popupWithImage = new PopupWithImage(document.querySelector('#popup-img'), document.querySelector('.popup__img'));
+        this._popupName = popupName;
     }
     
     
     // Получаем шаблон карточки
     _getTemplate() {
-        /*this._card = document.querySelector('#card').cloneNode(true).content;
-        return this._card;*/
         return this._selectorTemplateElement.cloneNode(true).content;
     }
 
 
     _openFullImage() {
-        this._popupWithImage.open(popupName, this._link, this._name);
-        //popupWithImage.open(popupName, this._link, this._name);
+        this._popupWithImage.open(this._popupName, this._link, this._name);
     }
     
     _openDeletePopup() {

@@ -16,7 +16,7 @@ export class UserInfo{
     }
 
     setUserInfo(name, about) {
-        api.sendInfo(name, about);
+        api.sendInfo(name, about)
         this.getUserInfo();
     }
 }

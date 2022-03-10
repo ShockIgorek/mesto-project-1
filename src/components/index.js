@@ -52,6 +52,7 @@ const popupBtnSave = document.querySelector('#save-button');
 const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
 const cardTemplate = document.querySelector('#card');
+const popupNameItem = document.querySelector('.popup__name');
 const popupWithImage = new PopupWithImage(document.querySelector('#popup-img'), document.querySelector('.popup__img'));
 const popupAvatarForm = new PopupWithForm(popupFormAvatar, SectionPopupAvatar, handleAvatarSubmit);
 const popupEditForm = new PopupWithForm(popupFormEdit, profileEditPopup, handleUserInfoFormSubmit);
@@ -94,7 +95,7 @@ function createCards(arrCard) {
       likes: element.likes,
       cardId: element._id
     }
-    return new Card(data, cardTemplate, popupWithImage, popupDelOneCard, api, meId);
+    return new Card(data, cardTemplate, popupWithImage, popupDelOneCard, api, meId, popupNameItem);
   });
 }
 
@@ -155,7 +156,7 @@ function handleAvatarSubmit(evt, inputValues) {
     .then(() => {
       changeAvatar(profileAvatarImg, inputValues);
       popupAvatarForm.close();
-      console.log(formValidatorAvatar.disableButton(popupAvatarBtnSave));
+      formValidatorAvatar.disableButton(popupAvatarBtnSave);
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
     .finally(() => {
@@ -167,13 +168,15 @@ function handleAvatarSubmit(evt, inputValues) {
 function handleUserInfoFormSubmit(evt, inputValues) {
   evt.preventDefault();
   popupBtnSave.textContent = 'Сохранение...';
-  userInfo.setUserInfo(inputValues[0], inputValues[1]);
+  userInfo.setUserInfo(inputValues[0], inputValues[1])
+  popupEditForm.close();
   const nameValue = inputValues[0];
   const careerValue = inputValues[1];
-  popupBtnSave.textContent = 'Сохранить';
-  popupEditForm.close();
   userNameField.value = nameValue;
   userCareerField.value = careerValue;
+    
+  popupBtnSave.textContent = 'Сохранить';
+  popupBtnSave.textContent = 'Сохранить';
 }
 
 function handleCardInfoFormSubmit(evt, inputValues) {
@@ -190,7 +193,7 @@ function handleCardInfoFormSubmit(evt, inputValues) {
         cardId: card._id
       }
 
-      const newCard = new Card(data, cardTemplate, popupWithImage, popupDelOneCard, api, meId);
+      const newCard = new Card(data, cardTemplate, popupWithImage, popupDelOneCard, api, meId, popupNameItem);
       section.addItem(newCard.createCard());
       formValidatorAdd.disableButton(popupBtnCreate);
       popupAddForm.close();
