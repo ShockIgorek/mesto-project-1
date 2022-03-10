@@ -2,7 +2,7 @@ export let itemCard;
 export let itemCardId;
 
 export class Card {
-    constructor(data, selectorTemplateElement, PopupWithImage, popupDeleteCard, Api, meId, popupName) {
+    constructor(data, selectorTemplateElement, PopupWithImage, popupDeleteCard, Api, meId) {
         this._name = data.name;
         this._link = data.link;
         this._likesCount = data.likesCount;
@@ -17,7 +17,6 @@ export class Card {
         this._api = Api;
 
         this._meId = meId;
-        this._popupName = popupName;
     }
     
     
@@ -28,7 +27,7 @@ export class Card {
 
 
     _openFullImage() {
-        this._popupWithImage.open(this._popupName, this._link, this._name);
+        this._popupWithImage.open(/*this._popupName,*/ this._link, this._name/*, this._name*/);
     }
     
     _openDeletePopup() {
