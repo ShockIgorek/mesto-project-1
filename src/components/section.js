@@ -5,8 +5,8 @@ export class Section {
     }
 
     renderItems(arrCard) {
-        arrCard.reverse().forEach(element => {
-            this._dataRenderer(element);
+        arrCard.forEach(card => {
+            this._dataRenderer(card);
         });
     }
 
