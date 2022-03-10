@@ -155,6 +155,7 @@ function handleAvatarSubmit(evt, inputValues) {
     .then(() => {
       changeAvatar(profileAvatarImg, inputValues);
       popupAvatarForm.close();
+      console.log(formValidatorAvatar.disableButton(popupAvatarBtnSave));
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
     .finally(() => {
