@@ -54,7 +54,6 @@ export class Card {
         if (!this._likeBtn.classList.contains("card__heart_active")) {
             this._addLike(this._cardId)
                 .then((res) => {
-                    console.log(res)
                     this._data = res;
                     this._likesNumber.textContent = res.likes.length;
                     this._likeBtn.classList.add("card__heart_active");

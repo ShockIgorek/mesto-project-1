@@ -96,20 +96,18 @@ let meId;
 let idCard;
 let addLikeCard;
 let removeLikeCard;
-console.log(idCard);
+// console.log(idCard);
 
 api.getAppInfo()
   .then(([user, cards]) => {
     userInfo.getUserInfo();
     changeAvatar(profileAvatarImg, user.avatar);
     meId = user._id;
-    // console.log(meId);
-    // console.log(cards);
+    console.log(meId);
+    console.log(user._id);
 
     const createdCards = createCards(cards);
     section.renderItems(createdCards);
-    // idCard = card._id;
-    // console.log(idCard)
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
 
@@ -124,7 +122,7 @@ const openImagePopup = (evt) => {
 };
 
 const createCard = (data) => {
-  console.log(data)
+  // console.log(data)
   const card = new Card(data, cardTemplate, openImagePopup, meId, deleteCard, (addLikeCard = (data) => {
       return api.addLikeCard(data);
     }),
@@ -147,6 +145,7 @@ function createCards(arrCard) {
       likes: element.likes,
       cardId: element._id
     }
+    console.log(data);
     return new Card(data, cardTemplate, openImagePopup, meId, deleteCard, (addLikeCard = (data) => {
         return api.addLikeCard(data.cardId);
       }),
@@ -245,6 +244,7 @@ function handleCardInfoFormSubmit(evt, inputValues) {
         likes: card.likes,
         cardId: card._id
       }
+      console.log(card._id)
 
       const newCard = (data) => new Card(data, cardTemplate, popupWithImage, popupDelCard, api, meId, deleteCard);
       section.addItem(newCard.createCard());
@@ -289,8 +289,8 @@ popupWithImage.setEventListeners();
 
 Promise.all(initialData)
   .then(([userData, cards]) => {
-    console.log(userData);
-    console.log(cards)
+    // console.log(userData);
+    // console.log(cards)
     meId = userData._id;
     userInfo.setUserInfo(userData.name, userData.about, );
     section.renderItems(cards.reverse());
