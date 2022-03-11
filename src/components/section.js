@@ -1,16 +1,20 @@
 export class Section {
-    constructor(renderer, containerSelector) {
-        this._dataRenderer = renderer;
-        this._containerSelector = containerSelector;
+    constructor({
+        renderItems
+    }, containerSelector) {
+        this._renderer = renderItems;
+        this._container = containerSelector;
     }
 
-    renderItems(arrCard) {
-        arrCard.forEach(card => {
-            this._dataRenderer(card);
+    //* Рендер карточек
+    renderItems(items) {
+        items.forEach((item) => {
+            this._renderer(item);
         });
     }
 
+    //* Добавление карточки
     addItem(cardTemplate) {
-        this._containerSelector.prepend(cardTemplate)
+        this._container.prepend(cardTemplate);
     }
 }

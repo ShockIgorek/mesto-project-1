@@ -1,18 +1,22 @@
-import { Popup } from './Popup';
+import {
+    Popup
+} from './Popup';
 
+//* Класс попапа с картинкой
 export class PopupWithImage extends Popup {
-    constructor(popupSelector, imgSelector) {
-        super(popupSelector); 
-        this._imgSelector = document.querySelector(imgSelector);
-        this._popupName =  this._popupSelector.querySelector('.popup__name');
+    constructor(popupElement) {
+        super(popupElement);
+        this._image = this._popupElement.querySelector(".popup__image");
+        this._imageSubtitle = this._popupElement.querySelector(
+            ".popup__image-subtitle"
+        );
     }
 
+    //* Перезапись родительского метода
     open(data) {
-        console.log(data)
         super.open();
-        this._imgSelector.setAttribute('src', data.image);
-        this._imgSelector.setAttribute('alt', data.text);
-        this._popupName.textContent = data.text;
+        this._image.src = data.image;
+        this._image.alt = data.text;
+        this._imageSubtitle.textContent = `${data.text}`;
     }
 }
-

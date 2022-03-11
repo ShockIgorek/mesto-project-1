@@ -19,7 +19,7 @@ export class Api {
             .then(res => this._checkResponse(res));
     }
 
-    getCards() {
+    getInitialCards() {
         this.getInfo();
         return fetch(`${this._baseUrl}cards`, {
                 headers: this._headers
@@ -27,17 +27,15 @@ export class Api {
             .then(res => this._checkResponse(res));
     }
 
-    getAppInfo() {
-        return Promise.all([this.getInfo(), this.getCards()]);
-    }
 
-    sendInfo(myName, aboutMe) {
+
+    editProfile(data) {
         return fetch(`${this._baseUrl}users/me`, {
                 method: 'PATCH',
                 headers: this._headers,
                 body: JSON.stringify({
-                    name: myName,
-                    about: aboutMe
+                    name: data.myName,
+                    about: data.aboutMe
                 })
             })
             .then(res => this._checkResponse(res));
@@ -55,7 +53,7 @@ export class Api {
             .then(res => this._checkResponse(res));
     }
 
-    deleteUserCard(id) {
+    deleteCard(id) {
         return fetch(`${this._baseUrl}cards/${id}`, {
                 method: 'DELETE',
                 headers: this._headers
@@ -63,7 +61,7 @@ export class Api {
             .then(res => this._checkResponse(res));
     }
 
-    addLikeCard(id) {
+    addCardLike(id) {
         return fetch(`${this._baseUrl}cards/likes/${id}`, {
                 method: 'PUT',
                 headers: this._headers
@@ -71,7 +69,7 @@ export class Api {
             .then(res => this._checkResponse(res));
     }
 
-    removeLikeCard(id) {
+    deleteCardLike(id) {
         return fetch(`${this._baseUrl}cards/likes/${id}`, {
                 method: 'DELETE',
                 headers: this._headers
@@ -79,7 +77,7 @@ export class Api {
             .then(res => this._checkResponse(res));
     }
 
-    updateAvatarUser(imgLink) {
+    editAvatar(imgLink) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
                 method: 'PATCH',
                 headers: this._headers,
