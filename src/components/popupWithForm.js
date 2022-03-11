@@ -9,7 +9,8 @@ export class PopupWithForm extends Popup {
         this._popupSection = popupSection;
     }
 
-    _getInputValues() {
+    getInputValues() {
+        //return this._popupSection.querySelectorAll('.popup__edit')
         return Array.from(this._popupSection.querySelectorAll('.popup__edit')).map(item => {
             return item.value;
         })
@@ -17,7 +18,7 @@ export class PopupWithForm extends Popup {
     
     setEventListeners(evt) {
         super.setEventListeners();
-        this._popupSection.addEventListener('submit', (evt) => {this._callbackSubmitForm(evt, this._getInputValues())});
+        this._popupSection.addEventListener('submit', this._callbackSubmitForm);
     } 
 
     close() {
@@ -25,5 +26,10 @@ export class PopupWithForm extends Popup {
         Array.from(document.querySelectorAll('.popup__form')).forEach(form => {
             form.reset();
         })
+        
+        /*super.close();
+        this._getInputValues().forEach(element => {
+            element.value = '';
+        });*/
     }
 }
