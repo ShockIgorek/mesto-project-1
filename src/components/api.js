@@ -1,4 +1,4 @@
-class Api {
+export class Api {
     constructor(options) {
         this._baseUrl = options.baseUrl;
         this._headers = options.headers;
@@ -89,16 +89,4 @@ class Api {
             })
             .then(res => this._checkResponse(res));
     }
-}
-
-const api = new Api({
-    baseUrl: 'https://nomoreparties.co/v1/plus-cohort-6/',
-    headers: {
-        authorization: 'c6ea2481-28ed-4e6a-9bbe-85a531661bf0',
-        'Content-Type': 'application/json'
-    }
-});
-
-export {
-    api
 }

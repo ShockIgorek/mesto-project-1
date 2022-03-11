@@ -7,11 +7,12 @@ export class PopupWithImage extends Popup {
         this._popupName =  this._popupSelector.querySelector('.popup__name');
     }
 
-    open(imgLink, imgName) {
+    open(data) {
+        console.log(data)
         super.open();
-        this._imgSelector.setAttribute('src', imgLink);
-        this._imgSelector.setAttribute('alt', imgName);
-        this._popupName.textContent = imgName;
+        this._imgSelector.setAttribute('src', data.image);
+        this._imgSelector.setAttribute('alt', data.text);
+        this._popupName.textContent = data.text;
     }
 }
 

@@ -3,7 +3,7 @@ import {
 } from "./Popup.js";
 
 export class PopupWithDel extends Popup {
-    constructor( popupSection ,popupSelector,  {callbackSubmitForm}) {
+    constructor(popupSelector,  {callbackSubmitForm}) {
         super(popupSelector);
         this._form = this._popupSelector.querySelector(".popup__form");
         this._callbackSubmitForm = callbackSubmitForm;
