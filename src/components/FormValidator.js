@@ -8,6 +8,7 @@ export class FormValidator {
         this._errorClass = config.errorClass;
 
         this._buttonElement = this._formSelector.querySelector(this._submitButtonSelector);
+        this._inputList = Array.from(this._formSelector.querySelectorAll(this._inputSelector));
     }
 
     //Показываем ошибку
@@ -38,8 +39,8 @@ export class FormValidator {
     };
 
     //Проверяет имеются ли инвалидные импуты
-    _hasInvalidInput(inputList) {
-        return inputList.some(inputElement => {
+    _hasInvalidInput() {
+        return this._inputList.some(inputElement => {
             return !inputElement.validity.valid;
         });
     };
@@ -57,9 +58,9 @@ export class FormValidator {
     };
 
     //Переключение состояния кнопки
-    _toggleButtonState(inputList) {
+    _toggleButtonState() {
         //Если есть хотя бы 1 инвалидный инпут
-        if (this._hasInvalidInput(inputList)) {
+        if (this._hasInvalidInput(this._inputList)) {
             //Делаем кнопку не активной
             this.disableButton();
         } else {
@@ -69,15 +70,14 @@ export class FormValidator {
     };
 
     _setEventListeners() {
-        const inputList = Array.from(this._formSelector.querySelectorAll(this._inputSelector)); //Находим все input внутри формы
-        inputList.forEach(inputElement => {
+        this._inputList.forEach(inputElement => {
             inputElement.addEventListener('input', () => {
-                this._checkInputValidity(inputElement, this._inputErrorClass, this._errorClass);
-                this._toggleButtonState(inputList, this._submitButtonSelector, this._inactiveButtonClass);
+                this._checkInputValidity(inputElement);
+                this._toggleButtonState();
             });
         });
 
-        this._toggleButtonState(inputList, this._submitButtonSelector, this._inactiveButtonClass);
+        this._toggleButtonState();
     };
 
     enableValidation() {
