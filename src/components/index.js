@@ -55,6 +55,7 @@ const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
 const cardTemplate = document.querySelector('#card');
 const popupNameItem = document.querySelector('.popup__name');
+
 //получение данных
 const initialData = [api.getInfo(), api.getCards()]
 const popupWithImage = new PopupWithImage('#popup-img', '.popup__img', popupNameItem);
@@ -83,11 +84,13 @@ const deleteCardPopup = new PopupWithDel(popupDelCard, '#popup-delete-card', {
 });
 deleteCardPopup.setEventListeners();
 
+
 const deleteCard = (data) => {
   deleteCardPopup.data = data;
   // (console.log(deleteCardPopup.data))
   deleteCardPopup.open();
 };
+
 
 formValidatorAvatar.enableValidation();
 formValidatorEdit.enableValidation();
@@ -111,6 +114,7 @@ api.getAppInfo()
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
 
+
 const openImagePopup = (evt) => {
   const data = {
     image: evt.target.src,
@@ -132,8 +136,6 @@ const createCard = (data) => {
   const cardElem = card.createCard(data);
   return cardElem;
 }
-
-
 
 function createCards(arrCard) {
   return arrCard.map(element => {
@@ -157,7 +159,9 @@ function createCards(arrCard) {
 
 
 function renderCard(card) {
+
   section.addItem(createCard(card));
+
 }
 
 function changeElementTextContent(elementDOM, objValue) {
@@ -215,7 +219,7 @@ function handleAvatarSubmit(evt, inputValues) {
     .then(() => {
       changeAvatar(profileAvatarImg, inputValues);
       popupAvatarForm.close();
-      formValidatorAvatar.disableButton(popupAvatarBtnSave);
+      formValidatorAvatar.disableButton();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
     .finally(() => {
@@ -248,7 +252,7 @@ function handleCardInfoFormSubmit(evt, inputValues) {
 
       const newCard = (data) => new Card(data, cardTemplate, popupWithImage, popupDelCard, api, meId, deleteCard);
       section.addItem(newCard.createCard());
-      formValidatorAdd.disableButton(popupBtnCreate);
+      formValidatorAdd.disableButton();
       popupAddForm.close();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))

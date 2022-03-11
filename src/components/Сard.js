@@ -13,7 +13,6 @@ export class Card {
         this._deleteCard = deleteCard;
         this._addLike = addLike;
         this._deleteLike = deleteLike;
-
     }
 
 
