@@ -52,11 +52,12 @@ const popupBtnSave = document.querySelector('#save-button');
 const popupAvatarBtnSave = SectionPopupAvatar.querySelector('#save-avatar-btn');
 const popupFormAdd = document.querySelector('#popup-form-add');
 const cardTemplate = document.querySelector('#card');
-const popupWithImage = new PopupWithImage(document.querySelector('#popup-img'), document.querySelector('.popup__img'));
-const popupAvatarForm = new PopupWithForm(popupFormAvatar, SectionPopupAvatar, handleAvatarSubmit);
-const popupEditForm = new PopupWithForm(popupFormEdit, profileEditPopup, handleUserInfoFormSubmit);
-const popupAddForm = new PopupWithForm(popupFormAdd, sectionPopupAdd, handleCardInfoFormSubmit);
-const popupDelOneCard = new PopupWithForm(popupDelCard, popupDelCard);
+const popupNameItem = document.querySelector('.popup__name');
+const popupWithImage = new PopupWithImage('#popup-img', '.popup__img');
+const popupAvatarForm = new PopupWithForm(popupFormAvatar, '#popup-avatar', handleAvatarSubmit);
+const popupEditForm = new PopupWithForm(popupFormEdit, '#popup-edit', handleUserInfoFormSubmit);
+const popupAddForm = new PopupWithForm(popupFormAdd, '#popup-add', handleCardInfoFormSubmit);
+const popupDelOneCard = new PopupWithForm(popupDelCard, '#popup-delete-card');
 const section = new Section(renderCard, cardsContainer);
 const formValidatorAvatar = new FormValidator(popupFormAvatar, config)
 const formValidatorEdit = new FormValidator(popupFormEdit, config)
@@ -65,7 +66,6 @@ const userInfo = new UserInfo({
   userName: profileName,
   userAbout: profileCareer
 })
-
 
 formValidatorAvatar.enableValidation();
 formValidatorEdit.enableValidation();
@@ -85,8 +85,6 @@ api.getAppInfo()
   })
   .catch(err => console.log(`Что-то пошло не так: ${err}`))
 
-
-
 function createCards(arrCard) {
   return arrCard.map(element => {
     const data = {
@@ -102,7 +100,7 @@ function createCards(arrCard) {
 }
 
 function renderCard(card) {
-  card.renderCard();
+  section.addItem(card.createCard());
 }
 
 function changeElementTextContent(elementDOM, objValue) {
@@ -158,6 +156,7 @@ function handleAvatarSubmit(evt, inputValues) {
     .then(() => {
       changeAvatar(profileAvatarImg, inputValues);
       popupAvatarForm.close();
+      formValidatorAvatar.disableButton();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
     .finally(() => {
@@ -168,14 +167,9 @@ function handleAvatarSubmit(evt, inputValues) {
 
 function handleUserInfoFormSubmit(evt, inputValues) {
   evt.preventDefault();
+
+  userInfo.setUserInfo(inputValues[0], inputValues[1], popupEditForm.close())
   popupBtnSave.textContent = 'Сохранение...';
-  userInfo.setUserInfo(inputValues[0], inputValues[1]);
-  const nameValue = inputValues[0];
-  const careerValue = inputValues[1];
-  popupBtnSave.textContent = 'Сохранить';
-  popupEditForm.close();
-  userNameField.value = nameValue;
-  userCareerField.value = careerValue;
 }
 
 function handleCardInfoFormSubmit(evt, inputValues) {
@@ -194,7 +188,7 @@ function handleCardInfoFormSubmit(evt, inputValues) {
 
       const newCard = new Card(data, cardTemplate, popupWithImage, popupDelOneCard, api, meId);
       section.addItem(newCard.createCard());
-      formValidatorAdd.disableButton(popupBtnCreate);
+      formValidatorAdd.disableButton();
       popupAddForm.close();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
