@@ -156,7 +156,7 @@ function handleAvatarSubmit(evt, inputValues) {
     .then(() => {
       changeAvatar(profileAvatarImg, inputValues);
       popupAvatarForm.close();
-      formValidatorAvatar.disableButton(popupAvatarBtnSave);
+      formValidatorAvatar.disableButton();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
     .finally(() => {
@@ -188,7 +188,7 @@ function handleCardInfoFormSubmit(evt, inputValues) {
 
       const newCard = new Card(data, cardTemplate, popupWithImage, popupDelOneCard, api, meId);
       section.addItem(newCard.createCard());
-      formValidatorAdd.disableButton(popupBtnCreate);
+      formValidatorAdd.disableButton();
       popupAddForm.close();
     })
     .catch(err => console.log(`Что-то пошло не так: ${err}`))
