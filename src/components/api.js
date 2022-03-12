@@ -61,7 +61,7 @@ export class Api {
             .then(res => this._checkResponse(res));
     }
 
-    addCardLike(id) {
+    addLikeCard(id) {
         return fetch(`${this._baseUrl}cards/likes/${id}`, {
                 method: 'PUT',
                 headers: this._headers
@@ -69,7 +69,7 @@ export class Api {
             .then(res => this._checkResponse(res));
     }
 
-    deleteCardLike(id) {
+    removeLikeCard(id) {
         return fetch(`${this._baseUrl}cards/likes/${id}`, {
                 method: 'DELETE',
                 headers: this._headers
