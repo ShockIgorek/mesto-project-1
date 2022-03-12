@@ -16,7 +16,10 @@ import {
   profileNameInput,
   profileCareerInput,
   profileAddBtn,
-  cardsContainer
+  cardsContainer,
+  popupBtnCreate,
+  popupBtnSave,
+  popupAvatarBtnSave
 } from './constants.js'
 import {
   Api
@@ -84,9 +87,14 @@ const openImagePopup = (evt) => {
 //удаление карточки
 const popupWithDel = new PopupWithDel(deletePopup, {
   formSubmitCallBack: (data) => {
-    let cardTemplate = data.card
+    console.log(data)
+
     api.deleteCard(data.cardId).then(() => {
-        cardTemplate.remove();
+        console.log(cardTemplate)
+        // data.querySelector('.card').card.remove();
+          const card = data.card.closest('card')
+          card.remove()
+
         popupWithDel.close();
       })
       .catch((err) => console.log(err)).finally(popupWithDel.close())
@@ -116,11 +124,11 @@ const createCard = (data) => {
   return cardElement;
 };
 const section = new Section({
-  renderItems: (data) => {
-    section.addItem(createCard(data));
+    renderItems: (data) => {
+      section.addItem(createCard(data));
+    },
   },
-},
-cardsContainer
+  cardsContainer
 );
 //редактирования профиля
 const userInfo = new UserInfo({
@@ -138,8 +146,9 @@ const editPopup = new PopupWithForm(profileEditPopup, {
       })
       .catch((err) => console.log(err))
       .finally(() => {
-
+        popupBtnSave.textContent = 'Сохраненть';
       });
+    popupBtnSave.textContent = 'Сохранение...';
   },
 });
 editPopup.setEventListeners();
@@ -157,9 +166,14 @@ const avatarEdit = new PopupWithForm(avataPopup, {
       .then((res) => {
         userInfo.setUserAvatar(res);
         avatarEdit.close();
+        formValidatorAvatar.disableButton();
       })
       .catch((err) => console.log(err))
-      .finally(() => {});
+      .finally(() => {
+        popupAvatarBtnSave.textContent = 'Сохранить';
+      });
+    popupAvatarBtnSave.textContent = 'Сохранение...';
+
   },
 });
 avatarEdit.setEventListeners();
@@ -170,22 +184,20 @@ profileAvatarBtn.addEventListener("click", () => {
 const addNewCardPopup = new PopupWithForm(addCardPopup, {
   formSubmitCallBack: (data) => {
     const card = data
-      api.addNewCard(card)
+    api.addNewCard(card)
       .then((res) => {
         section.addItem(createCard(res), true);
         addNewCardPopup.close();
+        formValidatorAdd.disableButton();
       })
       .catch((err) => console.log(err))
-      .finally(() => {});
+      .finally(() => {
+        popupBtnCreate.textContent = 'Создать';
+      });
+    popupBtnCreate.textContent = 'Создание...';
   },
 });
 addNewCardPopup.setEventListeners();
 profileAddBtn.addEventListener("click", () => {
   addNewCardPopup.open();
 });
-
-
-
-
-
-

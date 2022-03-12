@@ -30,7 +30,6 @@ export class Card {
                 this._deleteButtonClick()
             );
         }
-
         this._likeBtn.addEventListener("click", () => this._likeToggler());
 
         this._element

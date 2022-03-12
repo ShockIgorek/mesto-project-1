@@ -17,7 +17,9 @@ export class PopupWithForm extends Popup {
         this._formSubmitCallBack(this._getInputValues(), this._submitButton);
     }
     _getInputValues() {
-        const data = [this._inputs[0].value, this._inputs[1].value]
+        const data = Array.from(this._inputs).map(input => {
+            return input.value;
+        })
         return data;
     }
     close() {
