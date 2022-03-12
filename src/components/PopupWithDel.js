@@ -3,7 +3,7 @@ import {
 } from "./Popup.js";
 
 
-export class PopupConfirm extends Popup {
+export class PopupWithDel extends Popup {
     constructor(popupElement, { formSubmitCallBack }) {
       super(popupElement);
       this._formSubmitCallBack = formSubmitCallBack;
@@ -13,6 +13,7 @@ export class PopupConfirm extends Popup {
   
     _submit(evt) {
       evt.preventDefault();
+      console.log(this.data)
       this._formSubmitCallBack(this.data);
     }
   

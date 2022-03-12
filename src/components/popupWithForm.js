@@ -1,8 +1,6 @@
 import {
     Popup
 } from './Popup';
-
-//* Класс попапа с формой
 export class PopupWithForm extends Popup {
     constructor(popupElement, {
         formSubmitCallBack
@@ -14,29 +12,18 @@ export class PopupWithForm extends Popup {
         this._inputs = Array.from(this._form.querySelectorAll(".popup__edit"));
         this._submitButton = this._form.querySelector(".popup__save-btn");
     }
-
-    //* Сабмит формы
     _formSubmit(evt) {
         evt.preventDefault();
         this._formSubmitCallBack(this._getInputValues(), this._submitButton);
     }
-
-    //* Метод сбора данных со всех полей формы
     _getInputValues() {
-        const data = {};
-        this._inputs.forEach((input) => {
-            data[input.name] = input.value;
-        });
+        const data = [this._inputs[0].value, this._inputs[1].value]
         return data;
     }
-
-    //* Перезапись родительского метода закрытия попапа
     close() {
         super.close();
         this._form.reset();
     }
-
-    //* Перезапись родительского метода установки слушателей
     setEventListeners() {
         super.setEventListeners();
         this._form.addEventListener("submit", this._formSubmit);

@@ -5,15 +5,11 @@ export class Section {
         this._renderer = renderItems;
         this._container = containerSelector;
     }
-
-    //* Рендер карточек
     renderItems(items) {
         items.forEach((item) => {
             this._renderer(item);
         });
     }
-
-    //* Добавление карточки
     addItem(cardTemplate) {
         this._container.prepend(cardTemplate);
     }

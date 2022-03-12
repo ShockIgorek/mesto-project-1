@@ -1,12 +1,12 @@
 export class UserInfo {
     constructor({
         profileName,
-        profileJob,
+        profileCareer,
         profileId,
         profileAvatar
     }) {
         this._name = profileName;
-        this._job = profileJob;
+        this._job = profileCareer;
         this._profileId = profileId;
         this._profileAvatar = profileAvatar;
     }

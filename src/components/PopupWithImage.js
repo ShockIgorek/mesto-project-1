@@ -2,7 +2,6 @@ import {
     Popup
 } from './Popup';
 
-//* Класс попапа с картинкой
 export class PopupWithImage extends Popup {
     constructor(popupElement) {
         super(popupElement);
@@ -11,10 +10,7 @@ export class PopupWithImage extends Popup {
             ".popup__name"
         );
     }
-
-    //* Перезапись родительского метода
     open(data) {
-        console.log(data)
         super.open();
         console.log(this._image.src)
         this._image.src = data.image;

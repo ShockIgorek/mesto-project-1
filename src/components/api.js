@@ -34,20 +34,20 @@ export class Api {
                 method: 'PATCH',
                 headers: this._headers,
                 body: JSON.stringify({
-                    name: data.myName,
-                    about: data.aboutMe
+                    name: data[0],
+                    about: data[1]
                 })
             })
             .then(res => this._checkResponse(res));
     }
 
-    addNewCard(namePlace, placeLink) {
+    addNewCard(card) {
         return fetch(`${this._baseUrl}cards`, {
                 method: 'POST',
                 headers: this._headers,
                 body: JSON.stringify({
-                    name: namePlace,
-                    link: placeLink,
+                    name: card[0],
+                    link: card[1],
                 })
             })
             .then(res => this._checkResponse(res));
