@@ -47,7 +47,7 @@ export class Api {
                 headers: this._headers,
                 body: JSON.stringify({
                     name: namePlace,
-                    link: placeLink
+                    link: placeLink,
                 })
             })
             .then(res => this._checkResponse(res));

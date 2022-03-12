@@ -17,7 +17,7 @@ export class Card {
         this._imagePopup = imagePopup; //* функция открытия попапа с фото
         this._element = this._getTemplate(); //* разметка карточки
         this._likeButton = this._element.querySelector(".card__heart");
-        this._likeCounter = this._element.querySelector(".card__number-likesr");
+        this._likeCounter = this._element.querySelector(".card__number-likes");
         this._deleteButton = this._element.querySelector('.card__trash-bin');
         this._deleteCard = deleteCard;
         this._addCardLike = addCardLike;

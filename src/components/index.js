@@ -60,9 +60,10 @@ popupWithImage.setEventListeners();
 
 //* Открытие попапа с фото
 const openImagePopup = (evt) => {
+  console.log(evt.target.src)
   const data = {
     image: evt.target.src,
-    text: evt.target.closest(".elements__list-item").querySelector(".elements__text").textContent,
+    text: evt.target.closest(".card").querySelector(".card__text").textContent,
   };
   popupWithImage.open(data);
 };
@@ -154,12 +155,9 @@ avatarEdit.setEventListeners();
 //* Попап добавления карточки
 const addNewCardPopup = new PopupWithForm(addCardPopup, {
   formSubmitCallBack: (data, button) => {
-    const item = {
-      name: data.placeName,
-      link: data.placeLink,
-    };
+    console.log(data)
     api
-      .addNewCard(item)
+      .addNewCard(data.name, data.link)
       .then((res) => {
         section.addItem(createCard(res), true);
         addNewCardPopup.close();
