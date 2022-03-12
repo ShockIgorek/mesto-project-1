@@ -87,14 +87,8 @@ const openImagePopup = (evt) => {
 //удаление карточки
 const popupWithDel = new PopupWithDel(deletePopup, {
   formSubmitCallBack: (data) => {
-    console.log(data)
-
     api.deleteCard(data.cardId).then(() => {
-        console.log(cardTemplate)
-        // data.querySelector('.card').card.remove();
-          const card = data.card.closest('card')
-          card.remove()
-
+        data.card.remove()
         popupWithDel.close();
       })
       .catch((err) => console.log(err)).finally(popupWithDel.close())

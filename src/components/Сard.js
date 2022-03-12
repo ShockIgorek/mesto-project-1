@@ -70,8 +70,8 @@ export class Card {
     }
 
     _getTemplate() {
-        const cardElement = document
-            .querySelector(this._template).cloneNode(true).content;
+        const cardElement = document.querySelector(this._template)
+        .content.querySelector(".card").cloneNode(true);
         return cardElement;
     }
 

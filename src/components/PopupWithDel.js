@@ -12,9 +12,7 @@ export class PopupWithDel extends Popup {
     }
   
     _submit(evt) {
-      console.log(this._formSubmitCallBack)
       evt.preventDefault();
-      console.log(this.data)
       this._formSubmitCallBack(this.data);
     }
   
